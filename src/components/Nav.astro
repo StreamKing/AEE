@@ -55,8 +55,21 @@
             text-decoration: none;
             padding: 0.5rem;
           }
+
+          &.current-page {
+            border-width: 3px;
+          }
         }
       }
     }
   }
 </style>
+
+<script>
+  const allLinks = document.querySelectorAll(
+    'li:has( > a[href="' + window.location.pathname + '"])'
+  );
+  allLinks.forEach((link) => {
+    link.classList.add("current-page");
+  });
+</script>
