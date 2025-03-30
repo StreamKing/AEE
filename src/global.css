@@ -1,6 +1,8 @@
 @import url("colors.css");
 
 :root {
+  color-scheme: light dark;
+
   --inline-padding: 16px;
   --block-padding: 8px;
 
