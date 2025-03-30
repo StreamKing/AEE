@@ -1,0 +1,61 @@
+---
+
+---
+
+<div class="nav-container">
+  <nav class="nav">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">Über uns</a></li>
+      <li><a href="/blog">Förderungen </a></li>
+      <li><a href="/blog">Blog</a></li>
+    </ul>
+  </nav>
+</div>
+
+<style>
+  .nav-container {
+    container-type: inline-size;
+    --navigation-items-layout: row;
+    @container (max-width: 322px) {
+      .nav {
+        width: 100%;
+        ul {
+          --navigation-items-layout: column;
+          width: 100%;
+        }
+      }
+    }
+    .nav {
+      ul {
+        display: flex;
+        gap: 1rem;
+        list-style: none;
+
+        padding: 0;
+        flex-direction: var(--navigation-items-layout);
+
+        li {
+          cursor: pointer;
+          white-space: nowrap;
+          height: 32px;
+          display: flex;
+          align-items: center;
+
+          &:hover {
+            background-color: var(--nav-item-background-hover-color, red);
+            a {
+              color: var(--nav-item-text-color-hover-color, white);
+            }
+          }
+
+          a {
+            color: var(--primary-color);
+            text-decoration: none;
+            padding: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+</style>

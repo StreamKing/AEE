@@ -1,0 +1,10 @@
+@import url("colors.css");
+
+:root {
+  --inline-padding: 16px;
+  --block-padding: 8px;
+
+  header {
+    padding: var(--block-padding) var(--inline-padding);
+  }
+}
