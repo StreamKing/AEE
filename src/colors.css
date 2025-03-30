@@ -1,4 +1,6 @@
 :root {
+  --background-color: light-dark(white, black);
+
   --primary-color: #008bcc;
   --secondary-color: #0088c7d2;
   --border-color: #0088c7d2;
@@ -8,4 +10,6 @@
 
   --nav-item-background-hover-color: var(--primary-text-color);
   --nav-item-text-color-hover-color: black;
+
+  --small-text-color: light-dark(black, white);
 }
