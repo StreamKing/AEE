@@ -1,10 +1,11 @@
 :root {
-  --primary-color: #0088c7;
+  --primary-color: #008bcc;
   --secondary-color: #0088c7d2;
+  --border-color: #0088c7d2;
 
   --primary-text-color: var(--secondary-color);
   --highlight-color: var(--primary-color);
 
   --nav-item-background-hover-color: var(--primary-text-color);
-  --nav-item-text-color-hover-color: white;
+  --nav-item-text-color-hover-color: black;
 }

@@ -1,0 +1,107 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+  <h1>Förderungen der Stadt Sulzbach</h1>
+  <h2>Haftungsausschluss</h2>
+  <p>
+    Die hier aufgeführten Informationen haben keinen Anspruch auf Richtigkeit
+    und Vollständigkeit. Diese Informationen dienen nur zur Information über die
+    Förderungen der Gemeinde Sulzbach am Taunus. Die Tatsächlichen Informationen
+    finden sie auf der <a
+      aria-label="Link zu den Förderprogrammen der Gemeinde Sulzbach am Taunus"
+      href="https://www.sulzbach-taunus.de/kundenservice-rathaus/verwaltung/fachbereiche/planung-bauen-liegenschaften/foerderprogramme-der-gemeinde"
+      >Seite der Gemeinde</a
+    >.
+  </p>
+  <h2>Ausschlusskriterien</h2>
+  <p>
+    Eine Förderung durch die Gemeinde erfolgt nur, sofern keine zusätzliche
+    Drittförderung in Anspruch genommen wird und auch künftig nicht
+    erfolgt(Förderung/Finanzierung durch die KfW ausgenommen)
+  </p>
+
+  <div class="fundings"></div>
+</Layout>
+
+<style>
+  .fundings {
+    container-type: inline-size;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr 1fr 1fr;
+    .funding-card {
+      display: grid;
+      grid-template-columns: subgrid;
+      border: 1px solid var(--border-color);
+      padding: 1rem;
+      overflow-wrap: break-word;
+      .funding-name {
+        font-weight: bold;
+      }
+
+      h4 {
+        margin-bottom: 0;
+      }
+
+      h4 + p {
+        margin-top: 0;
+      }
+
+      h4:has(+ p:empty) {
+        display: none;
+      }
+
+      .link-button {
+        width: max-content;
+        height: max-content;
+        padding: 8px 16px;
+        font-weight: bold;
+        background-color: white;
+        border: 1px solid var(--border-color);
+        overflow-wrap: anywhere;
+
+        &:hover {
+          background-color: var(--primary-color);
+          color: black;
+        }
+      }
+    }
+
+    @container (max-width: 1090px) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @container (max-width: 720px) {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  import { FUNDINGS, type FundingEntry } from "../data/fundings.ts";
+
+  for (const fundingName in FUNDINGS["cities"]["sulzbach"]) {
+    const funding = (
+      FUNDINGS["cities"]["sulzbach"] as { [key: string]: FundingEntry }
+    )[fundingName];
+    console.log(fundingName, funding);
+
+    const fundingDiv = document.createElement("div");
+
+    fundingDiv.classList.add("funding-card");
+    fundingDiv.innerHTML = `
+      <h3 class="funding-name">${fundingName}</h3>
+      <h4 class="funding-description-title">Beschreibung</h4>
+      <p class="funding-description">${funding.description}</p>
+      <h4>Richtlinien</h4>
+      <p class="funding-policy">${funding.policy}</p>
+      <h4>Höhe der Förderung</h4>
+      <p class="funding-funding">${funding.funding}</p>
+      <a class="link-button" href="${funding.link}">Zu den Informationen der Gemeinde →</a>
+    `;
+
+    document.querySelector(".fundings")?.appendChild(fundingDiv);
+  }
+</script>

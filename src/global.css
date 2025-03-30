@@ -4,7 +4,27 @@
   --inline-padding: 16px;
   --block-padding: 8px;
 
-  header {
+  header,
+  main,
+  footer {
     padding: var(--block-padding) var(--inline-padding);
+  }
+
+  h1,
+  h2,
+  h3 {
+    color: var(--primary-text-color);
+  }
+
+  a,
+  h4,
+  h5,
+  h6 {
+    color: black;
+  }
+
+  *:focus-visible {
+    outline: 5px solid var(--highlight-color);
+    outline-offset: 3px;
   }
 }
