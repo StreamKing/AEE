@@ -33,13 +33,6 @@ import AeeLogo from "../assets/aee_logo.svg";
     display: flex;
     justify-content: end;
   }
-  .hello {
-    position: absolute;
-    background-color: red;
-    top: 80px;
-    width: 100px;
-    height: 100px;
-  }
 </style>
 
 <style>
@@ -50,6 +43,9 @@ import AeeLogo from "../assets/aee_logo.svg";
     height: 100%;
     display: flex;
     flex-direction: column;
+
+    background-color: var(--background-color);
+
     --header-grid-columns: min-content auto;
     --header-justify-nav-container: end;
     @container (max-width: 521px) {
