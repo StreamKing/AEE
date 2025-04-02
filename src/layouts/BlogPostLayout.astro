@@ -1,0 +1,29 @@
+---
+import "../colors.css";
+import "../global.css";
+import Layout from "./Layout.astro";
+const { frontmatter } = Astro.props;
+---
+
+<Layout>
+  <div class="centered">
+    <meta charset="utf-8" />
+    <h1>{frontmatter.title}</h1>
+    <p>Geschrieben von {frontmatter.author}</p>
+    <p>Veröffentlicht {frontmatter.pubDate}</p>
+    <hr />
+    <div>
+      <slot />
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .centered {
+    margin-inline: 12.5%;
+  }
+
+  .blog-post {
+    background-color: var(--background-color);
+  }
+</style>

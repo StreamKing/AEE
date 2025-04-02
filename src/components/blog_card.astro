@@ -1,0 +1,36 @@
+---
+const { blogpost } = Astro.props;
+const { spotlight } = Astro.props;
+---
+
+<div class="card">
+  <div class="header">
+    <h2>{blogpost.frontmatter.title}</h2>
+    {spotlight && <p>{blogpost.frontmatter.pubDate}</p>}
+  </div>
+  <div class="spotlight-content">
+    {spotlight && <Fragment set:html={blogpost.compiledContent()} />}
+  </div>
+  <a class="link-button" href={blogpost.url}>Blogeintrag aufrufen →</a>
+</div>
+
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-color);
+    padding: 8px 16px;
+
+    > .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    > .spotlight-content {
+      display: none;
+      display: block;
+      margin: 8px 0;
+    }
+  }
+</style>

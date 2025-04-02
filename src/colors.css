@@ -9,7 +9,7 @@
   --highlight-color: var(--primary-color);
 
   --nav-item-background-hover-color: var(--primary-text-color);
-  --nav-item-text-color-hover-color: black;
+  --nav-item-text-color-hover-color: light-dark(black, white);
 
   --small-text-color: light-dark(black, white);
 }

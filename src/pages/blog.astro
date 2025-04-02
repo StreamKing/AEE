@@ -1,7 +1,53 @@
 ---
+import BlogCard from "../components/blog_card.astro";
 import Layout from "../layouts/Layout.astro";
+const allPosts = Object.values(
+  import.meta.glob("./posts/*.md", { eager: true })
+).reverse();
+
+console.log(allPosts.map((post: any) => post.frontmatter.pubDate));
 ---
 
 <Layout>
   <h1>Blog</h1>
+
+  <ul class="blog-post-card-container">
+    {
+      allPosts.map((post: any, index) =>
+        index === 0 ? (
+          <li class="blog-post spotlight">
+            <BlogCard blogpost={post} spotlight={true} />
+          </li>
+        ) : (
+          <li class="blog-post">
+            <BlogCard blogpost={post} />
+          </li>
+        )
+      )
+    }
+  </ul>
 </Layout>
+
+<style>
+  h1 {
+    text-align: center;
+  }
+
+  .blog-post-card-container {
+    display: flex;
+    padding: calc(var(--block-padding) * 2) calc(var(--inline-padding) * 2);
+    box-sizing: border-box;
+
+    row-gap: 1rem;
+    column-gap: 2rem;
+    width: 100%;
+    flex-wrap: wrap;
+    .blog-post {
+      list-style: none;
+
+      &.spotlight {
+        flex: 1 0 100%;
+      }
+    }
+  }
+</style>
