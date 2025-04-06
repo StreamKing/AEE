@@ -9,6 +9,13 @@ export const FUNDINGS = {
         funding:
           "30 % des Kaufpreises, maximal jedoch 500 €, 1 Anlage pro Hausanschluss",
         link: "https://cms.sulzbach-taunus.de/media/downloads/RL-Trinkwasserenthaertungsanlagen-Stand-03_11_2021zuletzt-geaendert-am-05-07-2023.pdf",
+        calc: function calc(input: number) {
+          const total = input * 0.3;
+          if (total > 500) {
+            return 500;
+          }
+          return total;
+        },
       },
       Entsiegelungsmaßnahmen: {
         policy:
@@ -18,6 +25,13 @@ export const FUNDINGS = {
         funding:
           "50 % der Kosten, maximal jedoch 12,50 € / qm entsiegelter Fläche",
         link: "https://cms.sulzbach-taunus.de/media/downloads/RL-Entsiegelung-Stand-03_11_2021-zuletzt-bearbeitet-am-05-07-2023.pdf",
+        calc: function calc(input: number) {
+          const total = input * 0.3;
+          if (total > 500) {
+            return 500;
+          }
+          return total;
+        },
       },
       "Maßnahmen zur Herstellung von Dach- und Fassadenbegrünung": {
         policy:
@@ -27,6 +41,13 @@ export const FUNDINGS = {
         funding:
           "Dachbegrünung: 50 % der Kosten, maximal jedoch 15 € / qm extensiver Dachbegrünung, sowie 25 € / qm bei intensiver Dachbegrünung. Fassadenbegrünung: 50 % der Kosten, maximal jedoch 15 € / qm extensiver Fassadenbegrünung.",
         link: "https://cms.sulzbach-taunus.de/media/downloads/RL-Dach-und-Fassadenbegruendung-Stand-03_11_2021-zuletzt-bearbeitet-am-05-07-2023.pdf",
+        calc: function calc(input: number) {
+          const total = input * 0.3;
+          if (total > 500) {
+            return 500;
+          }
+          return total;
+        },
       },
       "E-Lastenräder": {
         policy: "beim Neukauf von E-Lastenrädern (Stand 03.11.2021)",
@@ -34,6 +55,13 @@ export const FUNDINGS = {
           "Die Förderung ist auf ein E-Lastenmotor je Haushalt / Gewerbebetrieb beschränkt.",
         funding: "30 % des Kaufpreises, maximal jedoch 500 €",
         link: "https://cms.sulzbach-taunus.de/media/downloads/RL-E-Lastenraeder-Stand-03_11_2021-zuletzt-bearbeitet-am-05-07-2023.pdf",
+        calc: function calc(input: number) {
+          const total = input * 0.3;
+          if (total > 500) {
+            return 500;
+          }
+          return total;
+        },
       },
       "Höchst-effiziente Haushaltsgeräte": {
         policy:
@@ -43,6 +71,13 @@ export const FUNDINGS = {
         funding:
           "15 % des Kaufpreises (ohne Lieferung und Installation). maximal jedoch 150 €. Die Förderung ist beschränkt auf insgesamt 1 Gerät pro Jahr und Haushalt.",
         link: "https://cms.sulzbach-taunus.de/media/downloads/RL-Haushaltsgeraete-Stand-03_11_2021-zuletzt-bearbeitet-am-05.07.2023.pdf",
+        calc: function calc(input: number) {
+          const total = input * 0.3;
+          if (total > 500) {
+            return 500;
+          }
+          return total;
+        },
       },
       "Steckbare Mini-PV-Anlagen / Balkonmodule": {
         policy:
@@ -52,6 +87,13 @@ export const FUNDINGS = {
         funding:
           "100 € / Modul, maximal jedoch 50 % des Kaufpreises. Die 2 Module pro Wohneinheit.",
         link: "https://cms.sulzbach-taunus.de/media/downloads/RL-Balkonmodule-Stand-16-07-2024.pdf",
+        calc: function calc(input: number) {
+          const total = input * 0.3;
+          if (total > 500) {
+            return 500;
+          }
+          return total;
+        },
       },
       "Photovoltaik-anlagen": {
         policy: "für Photovoltaik-anlagen (Stand 16.07.2024)",
@@ -59,12 +101,26 @@ export const FUNDINGS = {
         funding:
           "100 € / kWp, max. 1.000 € / Anlage. Die Bezuschussung von Photovoltaikanlagen ist auf eine Förderung je Grundstück beschränkt.",
         link: "https://cms.sulzbach-taunus.de/media/downloads/RL-Photovoltaikanlagen-Stand-16-07-2024.pdf",
+        calc: function calc(input: number) {
+          const total = input * 0.3;
+          if (total > 500) {
+            return 500;
+          }
+          return total;
+        },
       },
       "Stromspeicher Solaranlagen": {
         policy: "zu Stromspeichern (Stand 16.07.2024)",
         description: "",
         funding: "125 € / kWh Speicherkapazität. Max. 1250 € / Grundstück",
         link: "https://cms.sulzbach-taunus.de/media/downloads/RL-Stromspeicher-Stand-16-07-2024.pdf",
+        calc: function calc(input: number) {
+          const total = input * 0.3;
+          if (total > 500) {
+            return 500;
+          }
+          return total;
+        },
       },
       "Solaranlagen zur Warmwasseraufbereitung und zur Heizungsunterstützung": {
         policy:
@@ -74,6 +130,13 @@ export const FUNDINGS = {
         funding:
           "50 € / qm Flachkollektorfläche. 80 € / qm Röhrenkollektor. Max. jedoch mit 300,00 € für Warmwasseraufbereitung je Objekt / Gebäude und max. 500 € für Heizungsunterstützung je Objekt / Gebäude.",
         link: "https://cms.sulzbach-taunus.de/media/downloads/RL-Solaranlagen-WarmwasserHeizung-Stand-30_05_2017-zuletzt-bearbeitet-am-05-07-2023.pdf",
+        calc: function calc(input: number) {
+          const total = input * 0.3;
+          if (total > 500) {
+            return 500;
+          }
+          return total;
+        },
       },
     },
   },
@@ -84,4 +147,5 @@ export interface FundingEntry {
   description: string;
   funding: string;
   link?: string;
+  calc?: () => number;
 }

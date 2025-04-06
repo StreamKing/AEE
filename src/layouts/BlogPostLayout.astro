@@ -7,7 +7,8 @@ const { frontmatter } = Astro.props;
 
 <Layout>
   <div class="centered">
-    <meta charset="utf-8" />
+    <a class="link-button" href="/AEE/blog/">← zurück</a>
+
     <h1>{frontmatter.title}</h1>
     <p>Geschrieben von {frontmatter.author}</p>
     <p>Veröffentlicht {frontmatter.pubDate}</p>

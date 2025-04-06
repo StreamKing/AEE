@@ -53,6 +53,10 @@ import Layout from "../layouts/Layout.astro";
         display: none;
       }
 
+      p:empty {
+        display: none;
+      }
+
       .link-button {
         width: max-content;
         height: max-content;
@@ -86,6 +90,8 @@ import Layout from "../layouts/Layout.astro";
       FUNDINGS["cities"]["sulzbach"] as { [key: string]: FundingEntry }
     )[fundingName];
 
+    const fundingCalculator = funding?.calc ? `` : "";
+
     const fundingDiv = document.createElement("div");
 
     fundingDiv.classList.add("funding-card");
@@ -97,6 +103,7 @@ import Layout from "../layouts/Layout.astro";
       <p class="funding-policy">${funding.policy}</p>
       <h4>Höhe der Förderung</h4>
       <p class="funding-funding">${funding.funding}</p>
+      ${fundingCalculator}
       <a class="link-button" href="${funding.link}">Zu den Informationen der Gemeinde →</a>
     `;
 

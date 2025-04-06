@@ -66,9 +66,12 @@
 </style>
 
 <script>
+  console.log(window.location.pathname);
+
   const allLinks = document.querySelectorAll(
     'li:has( > a[href="' + window.location.pathname + '"])'
   );
+  console.log(allLinks);
   allLinks.forEach((link) => {
     link.classList.add("current-page");
   });

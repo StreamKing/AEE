@@ -2,10 +2,26 @@
 import BlogCard from "../components/blog_card.astro";
 import Layout from "../layouts/Layout.astro";
 const allPosts = Object.values(
-  import.meta.glob("./posts/*.md", { eager: true })
-).reverse();
+  import.meta.glob("./blog/*.md", { eager: true })
+);
 
-console.log(allPosts.map((post: any) => post.frontmatter.pubDate));
+const stringToSeconds = (str: string): number => {
+  const splitted = str.split(".");
+  const day = splitted[0];
+  const month = splitted[1];
+  const year = splitted[2];
+  const stringDate = `${month}-${day}-${year}`;
+  console.log(stringDate);
+  return Date.parse(stringDate);
+};
+
+allPosts
+  .sort(
+    (a: any, b: any) =>
+      stringToSeconds(a.frontmatter.pubDate) -
+      stringToSeconds(b.frontmatter.pubDate)
+  )
+  .reverse();
 ---
 
 <Layout>

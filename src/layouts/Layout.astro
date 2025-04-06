@@ -4,6 +4,9 @@ import "../global.css";
 import Nav from "../components/Nav.astro";
 import { Image } from "astro:assets";
 import AeeLogo from "../assets/aee_logo.svg";
+const { centered } = Astro.props;
+
+const layout = centered ? "centered" : "full-width";
 ---
 
 <!doctype html>
@@ -11,17 +14,19 @@ import AeeLogo from "../assets/aee_logo.svg";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> -->
     <meta name="generator" content={Astro.generator} />
 
-    <title>Astro Basics</title>
+    <title>AEE Sulzbach</title>
   </head>
   <body>
     <header>
-      <Image class="aee-logo" src={AeeLogo} alt="" />
+      <a href="/AEE/" aria-label="Startseite"
+        ><Image class="aee-logo" src={AeeLogo} alt="" />
+      </a>
       <Nav />
     </header>
-    <main>
+    <main class={layout}>
       <slot />
     </main>
     <footer><p>&copy; {new Date().getFullYear()} Stefan Geiger</p></footer>
@@ -71,7 +76,13 @@ import AeeLogo from "../assets/aee_logo.svg";
   }
 
   main {
-    flex: 1;
+    &.full-width {
+      flex: 1;
+    }
+    &.centered {
+      flex: 1;
+      margin-inline: 12.5%;
+    }
   }
 </style>
 
