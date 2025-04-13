@@ -53,10 +53,18 @@ allPosts
     display: flex;
     padding: calc(var(--block-padding) * 2) calc(var(--inline-padding) * 2);
     box-sizing: border-box;
+    margin-inline: 20%;
+
+    @media (max-width: 1440px) {
+      margin-inline: 15%;
+    }
+
+    @media (max-width: 800px) {
+      margin-inline: 0%;
+    }
 
     row-gap: 1rem;
     column-gap: 2rem;
-    width: 100%;
     flex-wrap: wrap;
     .blog-post {
       list-style: none;
