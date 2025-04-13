@@ -3,7 +3,7 @@
 :root {
   color-scheme: light dark;
 
-  --inline-padding: 16px;
+  --inline-padding: 32px;
   --block-padding: 8px;
 
   header,
