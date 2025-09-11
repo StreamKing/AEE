@@ -6,6 +6,14 @@
   --inline-padding: 32px;
   --block-padding: 8px;
 
+  body {
+    container-type: inline-size;
+
+    @container (max-width: 600px) {
+      --inline-padding: 8px;
+    }
+  }
+
   header,
   main,
   footer {
