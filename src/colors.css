@@ -1,9 +1,9 @@
 :root {
-  --background-color: light-dark(white, black);
-
   --primary-color: #008bcc;
   --secondary-color: #0088c7d2;
   --border-color: #0088c7d2;
+
+  --background-color: light-dark(white, black);
 
   --primary-text-color: var(--secondary-color);
   --highlight-color: var(--primary-color);
