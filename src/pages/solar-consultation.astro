@@ -3,9 +3,185 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout centered="true">
-  <h1>Bürgersolar Beratung</h1>
-  <p>
-    Willkommen zur Bürgersolar Beratung. Hier finden Sie alle Informationen und
-    Unterstützung, die Sie benötigen.
-  </p>
+  <h1>Schulung zu Bürgersolarberaterinnen und Bürgersolarberatern</h1>
+  <p class="subtitle">durch Solarinitiative Schwalbach e.V.</p>
+
+  <section>
+    <h2>Termine & Ort</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Datum</th>
+          <th>Uhrzeit</th>
+          <th>Teil</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Mi, 25. 02. 2026</td>
+          <td>18:00–20:00 Uhr</td>
+          <td>Teil 1</td>
+        </tr>
+        <tr>
+          <td>Sa, 28. 02. 2026</td>
+          <td>09:00–17:00 Uhr</td>
+          <td>Teil 2</td>
+        </tr>
+        <tr>
+          <td>Mi, 04. 03. 2026</td>
+          <td>18:00–20:00 Uhr</td>
+          <td>Teil 3</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="note">
+      Die Mitteilung des Schulungsortes in Schwalbach erfolgt mit der Einladung.
+    </p>
+  </section>
+
+  <section>
+    <h2>Inhalte der Schulung</h2>
+    <ul>
+      <li>Einführung & Ziele der Bürgersolarberatung</li>
+      <li>Technische Grundlagen Photovoltaik</li>
+      <li>
+        Beratungsprozess & Projektvorbereitung (Kartenmaterial, Dachmaße,
+        Software-Tools)
+      </li>
+      <li>Kommunikation & Gesprächsführung</li>
+      <li>Praxisübungen: Dachbelegung & Wirtschaftlichkeitsbetrachtung</li>
+      <li>Organisation & Datenablage</li>
+      <li>Praxisbeispiele und Mentoring-Phase mit Tandemberatungen</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Für wen?</h2>
+    <p>
+      Die Schulung zu Bürgersolarberaterinnen und Bürgersolarberatern richtet
+      sich an Menschen mit Interesse an erneuerbarer Energie und Photovoltaik,
+      die Freude daran haben, andere bei deren PV-Projekt zu beraten.
+    </p>
+    <p>
+      Technisches Vorwissen ist hilfreich, aber keine Voraussetzung – wichtiger
+      sind Neugier, Lernbereitschaft und Motivation.
+    </p>
+    <h3>Engagement nach der Schulung</h3>
+    <p>Je nach individuellen Möglichkeiten:</p>
+    <ul>
+      <li>ca. 1 bis 2 Beratungen pro Monat</li>
+      <li>1–3 Stunden Vorbereitungszeit je Beratung</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Rahmenbedingungen</h2>
+    <ul>
+      <li>Eine Anmeldung ist <b>zwingend erforderlich</b>.</li>
+      <li>
+        Teilnahme kostenlos, da:
+        <ul>
+          <li>
+            gefördert durch #deinehrenamt, Hessische Staatskanzlei Referat V 6-1
+            Ehrenamt
+          </li>
+          <li>gefördert durch die Stadt Schwalbach am Taunus</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Kontakt</h2>
+    <p>
+      Solarinitiative Schwalbach e.V.<br />
+      <a href="mailto:solar.schwalbach@gmail.com">solar.schwalbach@gmail.com</a>
+    </p>
+  </section>
 </Layout>
+
+<style>
+  .subtitle {
+    font-size: 1.2rem;
+    color: var(--text-secondary, #666);
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  section {
+    margin-bottom: 2.5rem;
+  }
+
+  h1 {
+    word-wrap: break-word;
+  }
+
+  h2 {
+    color: var(--primary-color, #2c5282);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    color: var(--primary-color, #2c5282);
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.2rem;
+  }
+
+  ul {
+    list-style-type: none;
+    padding-left: 2rem;
+    margin: 1rem 0;
+  }
+
+  ul ul {
+    list-style-type: none;
+    margin-top: 0.5rem;
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+
+  .note {
+    font-style: italic;
+    color: var(--text-secondary, #666);
+    margin-top: 1rem;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.5rem 0;
+  }
+
+  th,
+  td {
+    border: 1px solid var(--border-color, #2c5282);
+    padding: 0.75rem;
+    text-align: left;
+  }
+
+  th {
+    background-color: var(--table-header-bg, #2c5282);
+    color: #ffffff;
+    font-weight: bold;
+  }
+
+  a {
+    color: var(--link-color, #2563eb);
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  p {
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+</style>

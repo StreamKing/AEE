@@ -22,80 +22,90 @@ import Layout from "../layouts/Layout.astro";
     erfolgt(Förderung/Finanzierung durch die KfW ausgenommen)
   </p>
 
-  <div class="fundings"></div>
-</Layout>
+  <p class="fundings-container">
+    Nach Stichwort filtern
+    <input id="keyword_filter" type="text" />
+    <p>
+      <div class="fundings"></div>
+    </p>
 
-<style>
-  .fundings {
-    container-type: inline-size;
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: 1fr 1fr 1fr;
-    .funding-card {
-      display: grid;
-      grid-template-columns: subgrid;
-      border: 1px solid var(--border-color);
-      padding: 1rem;
-      overflow-wrap: break-word;
-      .funding-name {
-        font-weight: bold;
-      }
+    <style>
+      .fundings-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
 
-      h4 {
-        margin-bottom: 0;
-      }
+        .fundings {
+          container-type: inline-size;
+          display: grid;
+          gap: 1rem;
+          grid-template-columns: 1fr 1fr 1fr;
+          .funding-card {
+            display: grid;
+            grid-template-columns: subgrid;
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            overflow-wrap: break-word;
+            .funding-name {
+              font-weight: bold;
+            }
 
-      h4 + p {
-        margin-top: 0;
-      }
+            h4 {
+              margin-bottom: 0;
+            }
 
-      h4:has(+ p:empty) {
-        display: none;
-      }
+            h4 + p {
+              margin-top: 0;
+            }
 
-      p:empty {
-        display: none;
-      }
+            h4:has(+ p:empty) {
+              display: none;
+            }
 
-      .link-button {
-        width: max-content;
-        height: max-content;
-        padding: 8px 16px;
-        font-weight: bold;
-        border: 1px solid var(--border-color);
-        overflow-wrap: anywhere;
+            p:empty {
+              display: none;
+            }
 
-        &:hover {
-          background-color: var(--primary-color);
-          color: black;
+            .link-button {
+              width: max-content;
+              height: max-content;
+              padding: 8px 16px;
+              font-weight: bold;
+              border: 1px solid var(--border-color);
+              overflow-wrap: anywhere;
+
+              &:hover {
+                background-color: var(--primary-color);
+                color: black;
+              }
+            }
+          }
+        }
+
+        @container (max-width: 1090px) {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        @container (max-width: 720px) {
+          grid-template-columns: 1fr;
         }
       }
-    }
+    </style>
 
-    @container (max-width: 1090px) {
-      grid-template-columns: 1fr 1fr;
-    }
+    <script>
+      import { FUNDINGS, type FundingEntry } from "../data/fundings.ts";
 
-    @container (max-width: 720px) {
-      grid-template-columns: 1fr;
-    }
-  }
-</style>
+      for (const fundingName in FUNDINGS["cities"]["sulzbach"]) {
+        const funding = (
+          FUNDINGS["cities"]["sulzbach"] as { [key: string]: FundingEntry }
+        )[fundingName];
 
-<script>
-  import { FUNDINGS, type FundingEntry } from "../data/fundings.ts";
+        const fundingCalculator = funding?.calc ? `` : "";
 
-  for (const fundingName in FUNDINGS["cities"]["sulzbach"]) {
-    const funding = (
-      FUNDINGS["cities"]["sulzbach"] as { [key: string]: FundingEntry }
-    )[fundingName];
+        const fundingDiv = document.createElement("div");
 
-    const fundingCalculator = funding?.calc ? `` : "";
-
-    const fundingDiv = document.createElement("div");
-
-    fundingDiv.classList.add("funding-card");
-    fundingDiv.innerHTML = `
+        fundingDiv.classList.add("funding-card");
+        fundingDiv.innerHTML = `
       <h3 class="funding-name">${fundingName}</h3>
       <h4 class="funding-description-title">Beschreibung</h4>
       <p class="funding-description">${funding.description}</p>
@@ -107,6 +117,35 @@ import Layout from "../layouts/Layout.astro";
       <a class="link-button" href="${funding.link}">Download PDF</a>
     `;
 
-    document.querySelector(".fundings")?.appendChild(fundingDiv);
-  }
-</script>
+        document.querySelector(".fundings")?.appendChild(fundingDiv);
+
+        const filterIInput = document.getElementById("keyword_filter");
+        filterIInput?.addEventListener("input", (event) => {
+          const target = event.target as HTMLInputElement;
+          const keyword = target.value.toLowerCase();
+
+          if (
+            fundingName.toLowerCase().includes(keyword) ||
+            funding.description.toLowerCase().includes(keyword) ||
+            funding.policy.toLowerCase().includes(keyword) ||
+            funding.funding.toLowerCase().includes(keyword)
+          ) {
+            const result = new RegExp(keyword, "gi");
+            const fundingDescriptions = fundingDiv.querySelectorAll(
+              ".funding-name, .funding-description, .funding-policy, .funding-funding",
+            );
+            fundingDescriptions.forEach((element) => {
+              element.innerHTML = element.textContent?.replace(
+                result,
+                (match) => `<mark>${match}</mark>`,
+              ) as string;
+            });
+            fundingDiv.style.display = "block";
+          } else {
+            fundingDiv.style.display = "none";
+          }
+        });
+      }
+    </script>
+  </p></Layout
+>
