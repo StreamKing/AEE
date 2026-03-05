@@ -1,2 +1,2 @@
-const BASE = "AEE";
-export const BASE_URL = `/${BASE}/`;
+const BASE = ""
+export const BASE_URL = `/${BASE}`;
