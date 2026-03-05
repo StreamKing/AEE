@@ -97,7 +97,7 @@ export const FUNDINGS = {
       },
       "Photovoltaik-anlagen": {
         policy: "für Photovoltaik-anlagen (Stand 16.07.2024)",
-        description: "",
+        description: "Die Bezuschussung von Photovoltaikanlagen ist auf eine Förderung je Grundstück beschränkt. Bei besonderen Grundstückskonstellationen (Gebäude steht z.B. auf 2 Grundstücken) werden mehrere Grundstücke als ein (Bau)Grundstück interpretiert.",
         funding:
           "100 € / kWp, max. 1.000 € / Anlage. Die Bezuschussung von Photovoltaikanlagen ist auf eine Förderung je Grundstück beschränkt.",
         link: "https://cms.sulzbach-taunus.de/media/downloads/RL-Photovoltaikanlagen-Stand-16-07-2024.pdf",
@@ -111,7 +111,7 @@ export const FUNDINGS = {
       },
       "Stromspeicher Solaranlagen": {
         policy: "zu Stromspeichern (Stand 16.07.2024)",
-        description: "",
+        description: "Die Bezuschussung von Stromspeichern ist auf eine Förderung je Grundstück beschränkt. Bei besonderen Grundstückskonstellationen (Gebäude steht z.B. auf 2 Grundstücken)werden mehrere Grundstücke als ein (Bau)Grundstück interpretiert.",
         funding: "125 € / kWh Speicherkapazität. Max. 1250 € / Grundstück",
         link: "https://cms.sulzbach-taunus.de/media/downloads/RL-Stromspeicher-Stand-16-07-2024.pdf",
         calc: function calc(input: number) {
@@ -130,6 +130,22 @@ export const FUNDINGS = {
         funding:
           "50 € / qm Flachkollektorfläche. 80 € / qm Röhrenkollektor. Max. jedoch mit 300,00 € für Warmwasseraufbereitung je Objekt / Gebäude und max. 500 € für Heizungsunterstützung je Objekt / Gebäude.",
         link: "https://cms.sulzbach-taunus.de/media/downloads/RL-Solaranlagen-WarmwasserHeizung-Stand-30_05_2017-zuletzt-bearbeitet-am-05-07-2023.pdf",
+        calc: function calc(input: number) {
+          const total = input * 0.3;
+          if (total > 500) {
+            return 500;
+          }
+          return total;
+        },
+      },
+      "Neuerrichtung von Niederschlagswassersammelanlagen (Zisternenförderung)": {
+        policy:
+          "Zuschüsse zur freiwilligen Neuerrichtung von Niederschlagswassersammelanlagen (Zisternenförderung).",
+        description:
+          "Antragsberechtigt sind alle privaten und gewerblichen Eigentümer von bebauten bzw. überbauten Grundstücken innerhalb der Gemeinde Sulzbach(Taunus).",
+        funding:
+          "Der Zuschuss beträgt 200,00 € / m³ gebauter Zisterne, maximal jedoch 2.000,00 €. Je Grundstück ist höchstens die Förderung einer Zisterne möglich. ",
+        link: "https://cms.sulzbach-taunus.de/media/downloads/RL-Zisternenfoerderung-Stand-06_03_2025.pdf",
         calc: function calc(input: number) {
           const total = input * 0.3;
           if (total > 500) {
