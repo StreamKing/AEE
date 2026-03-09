@@ -8,13 +8,13 @@ const { layout } = Astro.props;
 
 <style>
     main {
-        &.full-width {
-            flex: 1;
-        }
-        &.centered {
-            flex: 1;
-            margin-inline: 12.5%;
-            text-align: center;
-        }
+        flex: 1 0 auto;
+        width: min(var(--content-max-width), 100%);
+        margin-inline: auto;
+    }
+
+    main.centered {
+        max-width: var(--content-max-width-readable);
+        text-align: center;
     }
 </style>

@@ -9,7 +9,26 @@ import AeeLogo from "../assets/aee_logo.svg";
     ><Image class="aee-logo" src={AeeLogo} alt="" />
   </a>
   <div class="nav-container">
-    <nav class="nav" aria-label="Hauptnavigation">
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="site-navigation"
+      aria-label="Menü öffnen"
+    >
+      <span class="menu-toggle-label">Menü</span>
+      <span class="menu-toggle-icon" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+    </button>
+    <nav
+      id="site-navigation"
+      class="nav"
+      aria-label="Hauptnavigation"
+      data-open="false"
+    >
       <ul>
         <li><a href={BASE_URL}>Start</a></li>
         <li><a href={BASE_URL + "about"}>Über uns</a></li>
@@ -26,66 +45,163 @@ import AeeLogo from "../assets/aee_logo.svg";
 <style>
   header {
     display: grid;
-    gap: 8px;
+    gap: 12px;
     grid-template-columns: var(--header-grid-columns);
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background-color: var(--header-background-color);
+    border-bottom: 1px solid var(--border-color);
 
     .nav-container {
       justify-items: var(--header-justify-nav-container);
     }
 
+    > a {
+      display: inline-flex;
+      width: fit-content;
+      justify-self: start;
+      align-self: center;
+      line-height: 0;
+    }
+
     .aee-logo {
+      display: block;
       height: 72px;
       width: fit-content;
     }
   }
 
   .nav-container {
-    container-type: inline-size;
-    --navigation-items-layout: row;
-    @container (max-width: 495px) {
-      .nav {
-        width: 100%;
-        ul {
-          --navigation-items-layout: column;
-          width: 100%;
+    display: flex;
+    justify-content: var(--header-justify-nav-container);
+    align-items: center;
+    gap: 0.75rem;
+    position: relative;
+
+    .menu-toggle {
+      display: none;
+      align-items: center;
+      gap: 0.75rem;
+      min-height: 42px;
+      padding: 0.55rem 0.9rem;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      background-color: var(--surface-color);
+      color: var(--primary-text-color);
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+
+      .menu-toggle-label {
+        line-height: 1;
+      }
+
+      .menu-toggle-icon {
+        display: inline-flex;
+        flex-direction: column;
+        gap: 4px;
+
+        span {
+          display: block;
+          width: 18px;
+          height: 2px;
+          border-radius: 999px;
+          background-color: currentColor;
         }
       }
     }
+
     .nav {
       ul {
         display: flex;
-        gap: 1rem;
+        gap: 0.5rem;
         list-style: none;
 
         padding: 0;
+        margin: 0;
         flex-direction: var(--navigation-items-layout);
         justify-content: var(--header-justify-nav-container);
 
         li {
-          cursor: pointer;
-          white-space: nowrap;
-          height: 32px;
+          min-height: 38px;
           display: flex;
           align-items: center;
+          border-radius: var(--radius-md);
+          transition: background-color 0.2s ease;
 
-          border-bottom: 1px solid var(--nav-item-background-hover-color);
+          border: 1px solid transparent;
 
           &:hover {
-            background-color: var(--nav-item-background-hover-color, red);
+            background-color: var(--nav-item-background-hover-color);
+            border-color: var(--border-color);
+
             a {
-              color: var(--nav-item-text-color-hover-color, white);
+              color: var(--nav-item-text-color-hover-color);
             }
           }
 
           a {
             text-decoration: none;
-            padding: 0.5rem;
+            white-space: nowrap;
+            padding: 0.45rem 0.75rem;
             width: 100%;
+            color: var(--primary-text-color);
+            font-weight: 600;
           }
 
           &.current-page {
-            border-width: 3px;
+            border-color: var(--primary-color);
+            background-color: var(--secondary-color);
           }
+        }
+      }
+    }
+
+    @media (max-width: 900px) {
+      width: 100%;
+      justify-content: flex-end;
+
+      .menu-toggle {
+        display: inline-flex;
+        align-self: flex-end;
+      }
+
+      .nav {
+        position: absolute;
+        top: calc(100% + 0.5rem);
+        right: 0;
+        width: min(100%, 22rem);
+        padding: 0.5rem;
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-lg);
+        background-color: var(--surface-color);
+        box-shadow: var(--shadow-sm);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(-0.35rem);
+        transition:
+          opacity 0.18s ease,
+          transform 0.18s ease,
+          visibility 0.18s ease;
+
+        &[data-open="true"] {
+          opacity: 1;
+          visibility: visible;
+          pointer-events: auto;
+          transform: translateY(0);
+        }
+
+        ul {
+          width: 100%;
+          flex-direction: column;
+          gap: 0.35rem;
+        }
+
+        li {
+          width: 100%;
         }
       }
     }
@@ -93,6 +209,55 @@ import AeeLogo from "../assets/aee_logo.svg";
 </style>
 
 <script>
+  const toggleButton = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".nav");
+  const navLinks = document.querySelectorAll(".nav a");
+
+  const setMenuState = (open: boolean) => {
+    if (
+      !(toggleButton instanceof HTMLButtonElement) ||
+      !(nav instanceof HTMLElement)
+    ) {
+      return;
+    }
+
+    nav.dataset.open = String(open);
+    toggleButton.setAttribute("aria-expanded", String(open));
+    toggleButton.setAttribute(
+      "aria-label",
+      open ? "Menü schließen" : "Menü öffnen",
+    );
+  };
+
+  setMenuState(false);
+
+  if (toggleButton instanceof HTMLButtonElement) {
+    toggleButton.addEventListener("click", () => {
+      const isOpen = toggleButton.getAttribute("aria-expanded") === "true";
+      setMenuState(!isOpen);
+    });
+  }
+
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      if (window.matchMedia("(max-width: 900px)").matches) {
+        setMenuState(false);
+      }
+    });
+  });
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      setMenuState(false);
+    }
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 900) {
+      setMenuState(false);
+    }
+  });
+
   const allLinks = document.querySelectorAll(
     'li:has( > a[href="' + window.location.pathname + '"])',
   );

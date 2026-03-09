@@ -19,18 +19,41 @@ const { spotlight } = Astro.props;
     display: flex;
     flex-direction: column;
     border: 1px solid var(--border-color);
-    padding: 8px 16px;
+    border-radius: var(--radius-lg);
+    background-color: var(--surface-color);
+    box-shadow: var(--shadow-sm);
+    padding: 14px 18px;
+    gap: 0.6rem;
+
+    &:hover {
+      border-color: var(--primary-color);
+    }
 
     > .header {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
+      gap: 1rem;
+
+      h2 {
+        margin: 0;
+      }
+
+      p {
+        margin: 0;
+        white-space: nowrap;
+      }
     }
 
     > .spotlight-content {
       display: none;
-      display: block;
-      margin: 8px 0;
+      margin: 0.3rem 0 0.5rem;
+      max-width: 70ch;
+      line-height: 1.6;
     }
+  }
+
+  .card:has(.spotlight-content > *) .spotlight-content {
+    display: block;
   }
 </style>

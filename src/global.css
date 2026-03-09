@@ -1,54 +1,106 @@
 @import url("colors.css");
 
 :root {
-  color-scheme: light dark;
+  --inline-padding: clamp(12px, 3vw, 32px);
+  --block-padding: clamp(12px, 2vw, 20px);
+  --content-max-width: 1100px;
+  --content-max-width-readable: 76ch;
+  --base-font-size: 1rem;
+}
 
-  --inline-padding: 32px;
-  --block-padding: 8px;
+* {
+  box-sizing: border-box;
+}
 
-  body {
-    container-type: inline-size;
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  min-height: 100dvh;
+}
 
-    @container (max-width: 600px) {
-      --inline-padding: 8px;
-    }
-  }
+body {
+  background-color: var(--background-color);
+  color: var(--small-text-color);
+  font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: var(--base-font-size);
+  line-height: 1.65;
+  display: flex;
+  flex-direction: column;
+}
 
-  header,
-  main,
-  footer {
-    padding: var(--block-padding) var(--inline-padding);
-  }
+header,
+main,
+footer {
+  padding: var(--block-padding) var(--inline-padding);
+}
 
-  h1,
-  h2,
-  h3 {
-    color: var(--primary-text-color);
-  }
+h1,
+h2,
+h3 {
+  color: var(--primary-text-color);
+  line-height: 1.2;
+}
 
-  a,
-  h4,
-  h5,
-  h6 {
-    color: var(--small-text-color);
-  }
+h1 {
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+}
 
-  *:focus-visible {
-    outline: 5px solid var(--highlight-color);
-    outline-offset: 3px;
-  }
+h2 {
+  font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+}
 
-  .link-button {
-    width: max-content;
-    height: max-content;
-    padding: 8px 16px;
-    font-weight: bold;
-    border: 1px solid var(--border-color);
-    overflow-wrap: anywhere;
+h3 {
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+}
 
-    &:hover {
-      background-color: var(--primary-color);
-      color: black;
-    }
-  }
+p,
+li,
+td,
+th,
+label,
+input,
+textarea,
+select {
+  color: var(--small-text-color);
+}
+
+input,
+textarea,
+select {
+  background-color: var(--surface-color);
+  border-color: var(--border-color);
+}
+
+a {
+  color: var(--link-color);
+}
+
+*:focus-visible {
+  outline: 3px solid var(--highlight-color);
+  outline-offset: 2px;
+}
+
+.link-button {
+  width: max-content;
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--primary-color);
+  background-color: var(--primary-color);
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.link-button:hover {
+  background-color: var(--primary-color-strong);
+  border-color: var(--primary-color-strong);
+  color: #ffffff;
+  transform: translateY(-1px);
 }

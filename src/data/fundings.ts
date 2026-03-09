@@ -163,5 +163,5 @@ export interface FundingEntry {
   description: string;
   funding: string;
   link?: string;
-  calc?: () => number;
+  calc?: (input: number) => number;
 }

@@ -1,15 +1,58 @@
 :root {
-  --primary-color: #008bcc;
-  --secondary-color: #0088c7d2;
-  --border-color: #0088c7d2;
+  color-scheme: light;
 
-  --background-color: light-dark(white, rgb(28, 27, 27));
+  --primary-color: #005f8f;
+  --primary-color-strong: #004b70;
+  --secondary-color: #dceef8;
+  --accent-color: #f4b400;
 
-  --primary-text-color: var(--secondary-color);
-  --highlight-color: var(--primary-color);
+  --background-color: #f8fbf9;
+  --surface-color: #ffffff;
+  --surface-muted: #f1f6f3;
+  --border-color: #d7e5dc;
+  --header-background-color: color-mix(in srgb, var(--background-color) 92%, white 8%);
 
-  --nav-item-background-hover-color: var(--primary-text-color);
-  --nav-item-text-color-hover-color: light-dark(black, white);
+  --primary-text-color: #153042;
+  --small-text-color: #344d5d;
+  --muted-text-color: #4f6574;
+  --link-color: #00537d;
+  --text-secondary: #4f6574;
+  --table-header-bg: #004b70;
+  --highlight-color: #004b70;
 
-  --small-text-color: light-dark(black, white);
+  --nav-item-background-hover-color: var(--secondary-color);
+  --nav-item-text-color-hover-color: var(--primary-text-color);
+
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --shadow-sm: 0 2px 12px rgb(19 49 33 / 8%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    --primary-color: #3aa4d6;
+    --primary-color-strong: #6bbbe3;
+    --secondary-color: #133549;
+    --accent-color: #ffd166;
+
+    --background-color: #0d1720;
+    --surface-color: #13212b;
+    --surface-muted: #1a2b37;
+    --border-color: #284252;
+    --header-background-color: color-mix(in srgb, var(--background-color) 90%, black 10%);
+
+    --primary-text-color: #eef7fc;
+    --small-text-color: #d8e7f1;
+    --muted-text-color: #bdd2df;
+    --link-color: #7fd1ff;
+    --text-secondary: #bdd2df;
+    --table-header-bg: #0b3d5b;
+    --highlight-color: #7fd1ff;
+
+    --nav-item-background-hover-color: #183546;
+    --nav-item-text-color-hover-color: #eef7fc;
+    --shadow-sm: 0 10px 24px rgb(0 0 0 / 28%);
+  }
 }

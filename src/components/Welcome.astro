@@ -1,18 +1,51 @@
 ---
-
+import { BASE_URL } from "../../config";
 ---
 
-<h1>Willkommen auf unserer Webseite</h1>
-
-<h2>
-  Bei uns dreht sich alles um erneuerbare Energien und die Umwelt in der
-  Sulzbacher Gemeinde.
-</h2>
+<section class="hero">
+  <p class="badge">Energie vor Ort</p>
+  <h1>Willkommen bei AEE Sulzbach</h1>
+  <h2>
+    Bei uns dreht sich alles um erneuerbare Energien und die Umwelt in der
+    Sulzbacher Gemeinde.
+  </h2>
+  <div class="actions">
+    <a class="link-button" href={BASE_URL + "fundings"}>Förderungen ansehen</a>
+    <a class="link-button" href={BASE_URL + "blog"}>Zum Blog</a>
+  </div>
+</section>
 
 <style>
-  h1,
-  h2,
-  h3 {
-    text-align: var(--heading-alignment, center);
+  .hero {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: clamp(20px, 5vw, 48px);
+    text-align: center;
+  }
+
+  .badge {
+    margin: 0;
+    font-weight: 700;
+    color: var(--primary-color-strong);
+  }
+
+  h1 {
+    margin: 0.3rem 0 0;
+  }
+
+  h2 {
+    margin: 0.8rem auto 0;
+    max-width: 55ch;
+    font-weight: 500;
+  }
+
+  .actions {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
   }
 </style>
