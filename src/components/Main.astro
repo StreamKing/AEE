@@ -1,0 +1,20 @@
+---
+const { layout } = Astro.props;
+---
+
+<main class={layout}>
+    <slot />
+</main>
+
+<style>
+    main {
+        &.full-width {
+            flex: 1;
+        }
+        &.centered {
+            flex: 1;
+            margin-inline: 12.5%;
+            text-align: center;
+        }
+    }
+</style>

@@ -1,20 +1,44 @@
 ---
-import {BASE_URL} from "../../config";
+import { BASE_URL } from "../../config";
+import { Image } from "astro:assets";
+import AeeLogo from "../assets/aee_logo.svg";
 ---
 
-<div class="nav-container">
-  <nav class="nav">
-    <ul>
-      <li><a href={BASE_URL}>Start</a></li>
-      <li><a href={BASE_URL+"about"}>Über uns</a></li>
-      <li><a href={BASE_URL+"fundings"}>Förderungen</a></li>
-      <li><a href={BASE_URL+"solar-consultation"}>Bürgersolar Beratung</a></li>
-      <li><a href={BASE_URL+"blog"}>Blog</a></li>
-    </ul>
-  </nav>
-</div>
+<header>
+  <a href="/" aria-label="Startseite"
+    ><Image class="aee-logo" src={AeeLogo} alt="" />
+  </a>
+  <div class="nav-container">
+    <nav class="nav" aria-label="Hauptnavigation">
+      <ul>
+        <li><a href={BASE_URL}>Start</a></li>
+        <li><a href={BASE_URL + "about"}>Über uns</a></li>
+        <li><a href={BASE_URL + "fundings"}>Förderungen</a></li>
+        <li>
+          <a href={BASE_URL + "solar-consultation"}>Bürgersolar Beratung</a>
+        </li>
+        <li><a href={BASE_URL + "blog"}>Blog</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
 <style>
+  header {
+    display: grid;
+    gap: 8px;
+    grid-template-columns: var(--header-grid-columns);
+
+    .nav-container {
+      justify-items: var(--header-justify-nav-container);
+    }
+
+    .aee-logo {
+      height: 72px;
+      width: fit-content;
+    }
+  }
+
   .nav-container {
     container-type: inline-size;
     --navigation-items-layout: row;
@@ -69,9 +93,8 @@ import {BASE_URL} from "../../config";
 </style>
 
 <script>
-
   const allLinks = document.querySelectorAll(
-    'li:has( > a[href="' + window.location.pathname + '"])'
+    'li:has( > a[href="' + window.location.pathname + '"])',
   );
   allLinks.forEach((link) => {
     link.classList.add("current-page");

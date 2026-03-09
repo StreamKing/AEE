@@ -1,9 +1,10 @@
 ---
 import "../colors.css";
 import "../global.css";
-import Nav from "../components/Nav.astro";
-import { Image } from "astro:assets";
-import AeeLogo from "../assets/aee_logo.svg";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Main from "../components/Main.astro";
+
 const { centered } = Astro.props;
 
 const layout = centered ? "centered" : "full-width";
@@ -20,16 +21,11 @@ const layout = centered ? "centered" : "full-width";
     <title>AEE Sulzbach</title>
   </head>
   <body>
-    <header>
-      <a href="/" aria-label="Startseite"
-        ><Image class="aee-logo" src={AeeLogo} alt="" />
-      </a>
-      <Nav />
-    </header>
-    <main class={layout}>
+    <Header />
+    <Main layout={layout}>
       <slot />
-    </main>
-    <footer><p>&copy; {new Date().getFullYear()} Stefan Geiger</p></footer>
+    </Main>
+    <Footer />
   </body>
 </html>
 
@@ -58,32 +54,6 @@ const layout = centered ? "centered" : "full-width";
         --header-grid-columns: auto;
         --header-justify-nav-container: start;
       }
-    }
-  }
-
-  header {
-    display: grid;
-    gap: 8px;
-    grid-template-columns: var(--header-grid-columns);
-
-    .nav-container {
-      justify-items: var(--header-justify-nav-container);
-    }
-
-    .aee-logo {
-      height: 72px;
-      width: fit-content;
-    }
-  }
-
-  main {
-    &.full-width {
-      flex: 1;
-    }
-    &.centered {
-      flex: 1;
-      margin-inline: 12.5%;
-      text-align: center;
     }
   }
 </style>
