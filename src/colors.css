@@ -1,10 +1,12 @@
+@import url("theme_1.css");
+
 :root {
   color-scheme: light;
 
   /* Direkte Theme-Referenzen */
   --primary-color: var(--theme-primary);
   --accent-color: var(--theme-accent);
-  --background-color: var(--theme-background);
+  --background-color: color-mix(in srgb, var(--theme-primary) 15%, white);
   --primary-text-color: var(--theme-text);
   --link-color: var(--theme-primary);
 
@@ -35,7 +37,7 @@
     color-scheme: dark;
 
     /* Im Dark-Mode wird secondary zur primären Interaktionsfarbe */
-    --primary-color: var(--theme-secondary);
+    --primary-color: color-mix(in srgb, var(--theme-secondary) 60%, black 40%);
     --primary-color-strong: color-mix(in srgb, var(--theme-secondary) 70%, white);
     --secondary-color: color-mix(in srgb, var(--theme-primary) 20%, black);
     --accent-color: color-mix(in srgb, var(--theme-accent) 55%, var(--theme-secondary) 45%);
