@@ -1,0 +1,16 @@
+/* Farbpalette – Design-Tokens.
+   Semantische Tokens werden in colors.css daraus abgeleitet. */
+:root {
+    --theme-primary: hsla(200, 100%, 28%, 1);
+    /* #005f8f */
+    --theme-secondary: hsla(198, 63%, 67%, 1);
+    /* #78c0e0 */
+    --theme-accent: hsla(0, 100%, 32%, 1);
+    /* #a30000 */
+    --theme-text: hsla(0, 0%, 2%, 1);
+    /* #040404 */
+
+    /* Derived */
+    --theme-background: hsla(200, 30%, 93%, 1);
+    /* primary-Farbton, ~15% heller als primary */
+}

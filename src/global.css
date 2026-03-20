@@ -1,4 +1,5 @@
 @import url("colors.css");
+@import url("theme_1.css");
 
 :root {
   --inline-padding: clamp(12px, 3vw, 32px);
@@ -22,7 +23,7 @@ body {
 body {
   background-color: var(--background-color);
   color: var(--small-text-color);
-  font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+  font-family: Roboto, Arial, sans-serif;
   font-size: var(--base-font-size);
   line-height: 1.65;
   display: flex;

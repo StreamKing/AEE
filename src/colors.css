@@ -1,58 +1,61 @@
 :root {
   color-scheme: light;
 
-  --primary-color: #005f8f;
-  --primary-color-strong: #004b70;
-  --secondary-color: #dceef8;
-  --accent-color: #f4b400;
+  /* Direkte Theme-Referenzen */
+  --primary-color: var(--theme-primary);
+  --accent-color: var(--theme-accent);
+  --background-color: var(--theme-background);
+  --primary-text-color: var(--theme-text);
+  --link-color: var(--theme-primary);
 
-  --background-color: #f8fbf9;
-  --surface-color: #ffffff;
-  --surface-muted: #f1f6f3;
-  --border-color: #d7e5dc;
+  /* Abgeleitete Farben */
+  --primary-color-strong: color-mix(in srgb, var(--theme-primary) 75%, black);
+  --secondary-color: color-mix(in srgb, var(--theme-secondary) 35%, white);
+  --surface-color: white;
+  --surface-muted: color-mix(in srgb, var(--theme-background) 80%, var(--theme-secondary) 20%);
+  --border-color: color-mix(in srgb, var(--theme-secondary) 55%, white);
   --header-background-color: color-mix(in srgb, var(--background-color) 92%, white 8%);
 
-  --primary-text-color: #153042;
-  --small-text-color: #344d5d;
-  --muted-text-color: #4f6574;
-  --link-color: #00537d;
-  --text-secondary: #4f6574;
-  --table-header-bg: #004b70;
-  --highlight-color: #004b70;
+  --small-text-color: color-mix(in srgb, var(--theme-primary) 45%, var(--theme-text) 55%);
+  --muted-text-color: color-mix(in srgb, var(--theme-secondary) 50%, var(--theme-text) 50%);
+  --text-secondary: color-mix(in srgb, var(--theme-secondary) 50%, var(--theme-text) 50%);
+  --table-header-bg: var(--primary-color-strong);
+  --highlight-color: var(--primary-color-strong);
 
   --nav-item-background-hover-color: var(--secondary-color);
-  --nav-item-text-color-hover-color: var(--primary-text-color);
+  --nav-item-text-color-hover-color: var(--theme-text);
 
   --radius-md: 10px;
   --radius-lg: 14px;
-  --shadow-sm: 0 2px 12px rgb(19 49 33 / 8%);
+  --shadow-sm: 0 2px 12px color-mix(in srgb, var(--theme-primary) 10%, transparent);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     color-scheme: dark;
 
-    --primary-color: #3aa4d6;
-    --primary-color-strong: #6bbbe3;
-    --secondary-color: #133549;
-    --accent-color: #ffd166;
+    /* Im Dark-Mode wird secondary zur primären Interaktionsfarbe */
+    --primary-color: var(--theme-secondary);
+    --primary-color-strong: color-mix(in srgb, var(--theme-secondary) 70%, white);
+    --secondary-color: color-mix(in srgb, var(--theme-primary) 20%, black);
+    --accent-color: color-mix(in srgb, var(--theme-accent) 55%, var(--theme-secondary) 45%);
 
-    --background-color: #0d1720;
-    --surface-color: #13212b;
-    --surface-muted: #1a2b37;
-    --border-color: #284252;
+    --background-color: color-mix(in srgb, var(--theme-primary) 10%, black);
+    --surface-color: color-mix(in srgb, var(--theme-primary) 18%, black);
+    --surface-muted: color-mix(in srgb, var(--theme-primary) 24%, black);
+    --border-color: color-mix(in srgb, var(--theme-primary) 35%, black);
     --header-background-color: color-mix(in srgb, var(--background-color) 90%, black 10%);
 
-    --primary-text-color: #eef7fc;
-    --small-text-color: #d8e7f1;
-    --muted-text-color: #bdd2df;
-    --link-color: #7fd1ff;
-    --text-secondary: #bdd2df;
-    --table-header-bg: #0b3d5b;
-    --highlight-color: #7fd1ff;
+    --primary-text-color: var(--theme-background);
+    --small-text-color: color-mix(in srgb, var(--theme-background) 85%, var(--theme-secondary) 15%);
+    --muted-text-color: color-mix(in srgb, var(--theme-background) 60%, var(--theme-secondary) 40%);
+    --link-color: var(--theme-secondary);
+    --text-secondary: color-mix(in srgb, var(--theme-background) 60%, var(--theme-secondary) 40%);
+    --table-header-bg: color-mix(in srgb, var(--theme-primary) 15%, black);
+    --highlight-color: var(--theme-secondary);
 
-    --nav-item-background-hover-color: #183546;
-    --nav-item-text-color-hover-color: #eef7fc;
-    --shadow-sm: 0 10px 24px rgb(0 0 0 / 28%);
+    --nav-item-background-hover-color: var(--secondary-color);
+    --nav-item-text-color-hover-color: var(--theme-background);
+    --shadow-sm: 0 10px 24px color-mix(in srgb, var(--theme-text) 40%, transparent);
   }
 }
