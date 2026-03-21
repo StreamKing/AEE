@@ -3,23 +3,50 @@ import "../colors.css";
 import "../global.css";
 import Layout from "./Layout.astro";
 const { frontmatter } = Astro.props;
+
+const isAfterDate = (): boolean => {
+  if (!frontmatter.date) return false;
+  const splitted = frontmatter.date.split(".");
+  const day = splitted[0];
+  const month = splitted[1];
+  const year = splitted[2];
+  const stringDate = `${month}-${day}-${year}`;
+  return Date.now() > Date.parse(stringDate);
+};
 ---
 
 <Layout>
   <div class="centered">
-    <a class="link-button" href="/AEE/blog/">← zurück</a>
-
-    <h1>{frontmatter.title}</h1>
-    <p>Geschrieben von {frontmatter.author}</p>
-    <p>Veröffentlicht {frontmatter.pubDate}</p>
+    <a class="link-button" href="/termine/">← zurück</a>
+    <div class="header">
+      <h1>{frontmatter.title}</h1>
+      <h2>{frontmatter.date && frontmatter.date}</h2>
+      <p>{!frontmatter.date && `Termin noch nicht festgelegt`}</p>
+    </div>
+    {!isAfterDate() && <h4>{frontmatter.description}</h4>}
     <hr />
     <div>
       <slot />
     </div>
+    {isAfterDate() && <hr />}
+    {
+      isAfterDate() && (
+        <details style="cursor:pointer">
+          <summary style="cursor:pointer">Vergangene Nachrichten</summary>
+          <h4>{frontmatter.description}</h4>
+        </details>
+      )
+    }
   </div>
 </Layout>
 
 <style>
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
   .centered {
     margin-inline: 12.5%;
   }

@@ -1,11 +1,14 @@
 ---
-import BlogCard from "../components/blog_card.astro";
+import BlogCard from "../components/Termin_card.astro";
 import Layout from "../layouts/Layout.astro";
-const allPosts = Object.values(
-  import.meta.glob("./blog/*.md", { eager: true }),
-);
+const allPosts = Object.entries(
+  import.meta.glob("./termine/*.md", { eager: true }),
+)
+  .filter(([path]) => !path.split("/").pop()!.startsWith("_"))
+  .map(([, post]) => post);
 
 const stringToSeconds = (str: string): number => {
+  if (!str) return 0;
   const splitted = str.split(".");
   const day = splitted[0];
   const month = splitted[1];
@@ -14,17 +17,14 @@ const stringToSeconds = (str: string): number => {
   return Date.parse(stringDate);
 };
 
-allPosts
-  .sort(
-    (a: any, b: any) =>
-      stringToSeconds(a.frontmatter.pubDate) -
-      stringToSeconds(b.frontmatter.pubDate),
-  )
-  .reverse();
+allPosts.sort(
+  (a: any, b: any) =>
+    stringToSeconds(a.frontmatter.date) - stringToSeconds(b.frontmatter.date),
+);
 ---
 
 <Layout>
-  <h1>Blog</h1>
+  <h1>Termine und Veranstaltungen</h1>
 
   <ul class="blog-post-card-container">
     {

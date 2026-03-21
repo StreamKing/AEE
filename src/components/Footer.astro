@@ -3,71 +3,16 @@ import { BASE_URL } from "../../config";
 ---
 
 <footer>
-    <div class="footer-content">
-        <div>
-            <h3>AEE Sulzbach</h3>
-            <p>Erneuerbare Energien und Umwelt in der Sulzbacher Gemeinde.</p>
-        </div>
-
-        <nav aria-label="Footer Navigation">
-            <a href={BASE_URL}>Start</a>
-            <a href={BASE_URL + "about"}>Über uns</a>
-            <a href={BASE_URL + "fundings"}>Förderungen</a>
-            <a href={BASE_URL + "blog"}>Blog</a>
-        </nav>
-    </div>
     <p class="copyright">&copy; {new Date().getFullYear()} AEE Sulzbach</p>
 </footer>
 
 <style>
     footer {
-        margin-top: 24px;
-        border-top: 1px solid var(--border-color);
         background-color: transparent;
         color: var(--small-text-color);
     }
 
-    .footer-content {
-        width: min(var(--content-max-width), 100%);
-        margin-inline: auto;
-        display: flex;
-        justify-content: space-between;
-        gap: 1.25rem;
-        align-items: flex-start;
-        flex-wrap: wrap;
-    }
-
-    h3 {
-        margin: 0;
-        color: var(--muted-text-color);
-        font-size: 1rem;
-        font-weight: 600;
-    }
-
-    p {
-        margin: 0.4rem 0 0;
-        font-size: 0.95rem;
-        color: var(--muted-text-color);
-    }
-
-    nav {
-        display: flex;
-        gap: 0.75rem;
-        flex-wrap: wrap;
-    }
-
-    nav a {
-        text-decoration: none;
-        font-weight: 500;
-        color: var(--muted-text-color);
-    }
-
     .copyright {
-        width: min(var(--content-max-width), 100%);
-        margin: 0.8rem auto 0;
-        padding-top: 0.8rem;
-        border-top: 1px solid var(--border-color);
         font-size: 0.9rem;
-        color: var(--muted-text-color);
     }
 </style>
