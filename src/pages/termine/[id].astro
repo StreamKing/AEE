@@ -29,8 +29,22 @@ const isAfterDate = (): boolean => {
         <a class="link-button" href="/termine/">← zurück</a>
         <div class="header">
             <h1>{termin.data.title}</h1>
-            <h2>{termin.data.date && termin.data.date}</h2>
-            <p>{!termin.data.date && "Termin noch nicht festgelegt"}</p>
+            <div class="header-meta">
+                <h2>
+                    {
+                        termin.data.date
+                            ? termin.data.date
+                            : "Termin noch nicht festgelegt"
+                    }
+                </h2>
+                {
+                    termin.data.time && (
+                        <p class="time">
+                            {termin.data.time.von}–{termin.data.time.bis} Uhr
+                        </p>
+                    )
+                }
+            </div>
         </div>
         {!isAfterDate() && <h4>{termin.data.description}</h4>}
         <hr />
@@ -60,5 +74,13 @@ const isAfterDate = (): boolean => {
 
     .centered {
         margin-inline: 12.5%;
+    }
+
+    .centered :global(img) {
+        max-width: 100%;
+        width: stretch;
+        height: auto;
+        object-fit: cover;
+        border-radius: var(--radius-md);
     }
 </style>

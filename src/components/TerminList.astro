@@ -13,21 +13,36 @@ const parseDate = (str: string): Date => {
     return new Date(`${year}-${month}-${day}`);
 };
 
-const sortedTermine = [...termine].sort((a, b) => {
-    if (!a.data.date) return -1;
-    if (!b.data.date) return 1;
-    return parseDate(a.data.date).getTime() - parseDate(b.data.date).getTime();
-});
+const now = new Date();
+
+const upcoming = [...termine]
+    .filter((t) => !t.data.date || parseDate(t.data.date) >= now)
+    .sort((a, b) => {
+        if (!a.data.date) return 1;
+        if (!b.data.date) return -1;
+        return (
+            parseDate(a.data.date).getTime() - parseDate(b.data.date).getTime()
+        );
+    });
+
+const past = [...termine]
+    .filter((t) => t.data.date && parseDate(t.data.date) < now)
+    .sort(
+        (a, b) =>
+            parseDate(b.data.date!).getTime() -
+            parseDate(a.data.date!).getTime(),
+    )
+    .slice(0, 3);
 ---
 
 <section class="termin-list">
     <h2>Termine und Veranstaltungen</h2>
     {
-        sortedTermine.length === 0 ? (
-            <p>Keine Termine oder Veranstaltungen vorhanden.</p>
+        upcoming.length === 0 ? (
+            <p>Keine kommenden Termine oder Veranstaltungen vorhanden.</p>
         ) : (
             <ul>
-                {sortedTermine.map((termin) => (
+                {upcoming.map((termin) => (
                     <li>
                         <a
                             class="termin-card"
@@ -35,17 +50,25 @@ const sortedTermine = [...termine].sort((a, b) => {
                         >
                             <div class="termin-content">
                                 <h3>{termin.data.title}</h3>
-                                <time class="termin-date">
-                                    {termin.data.date
-                                        ? parseDate(
-                                              termin.data.date,
-                                          ).toLocaleDateString("de-DE", {
-                                              year: "numeric",
-                                              month: "long",
-                                              day: "numeric",
-                                          })
-                                        : "Termin noch nicht festgelegt"}
-                                </time>
+                                <div class="termin-meta">
+                                    <time class="termin-date">
+                                        {termin.data.date
+                                            ? parseDate(
+                                                  termin.data.date,
+                                              ).toLocaleDateString("de-DE", {
+                                                  year: "numeric",
+                                                  month: "long",
+                                                  day: "numeric",
+                                              })
+                                            : "Termin noch nicht festgelegt"}
+                                    </time>
+                                    {termin.data.time && (
+                                        <span class="termin-time">
+                                            {termin.data.time.von}–
+                                            {termin.data.time.bis} Uhr
+                                        </span>
+                                    )}
+                                </div>
                             </div>
                             <span class="termin-arrow" aria-hidden="true">
                                 →
@@ -54,6 +77,48 @@ const sortedTermine = [...termine].sort((a, b) => {
                     </li>
                 ))}
             </ul>
+        )
+    }
+    {
+        past.length > 0 && (
+            <>
+                <hr />
+                <h3 class="past-heading">Vergangene Termine</h3>
+                <ul>
+                    {past.map((termin) => (
+                        <li>
+                            <a
+                                class="termin-card past"
+                                href={`${BASE_URL}termine/${termin.id}`}
+                            >
+                                <div class="termin-content">
+                                    <h3>{termin.data.title}</h3>
+                                    <div class="termin-meta">
+                                        <time class="termin-date">
+                                            {parseDate(
+                                                termin.data.date!,
+                                            ).toLocaleDateString("de-DE", {
+                                                year: "numeric",
+                                                month: "long",
+                                                day: "numeric",
+                                            })}
+                                        </time>
+                                        {termin.data.time && (
+                                            <span class="termin-time">
+                                                {termin.data.time.von}–
+                                                {termin.data.time.bis} Uhr
+                                            </span>
+                                        )}
+                                    </div>
+                                </div>
+                                <span class="termin-arrow" aria-hidden="true">
+                                    →
+                                </span>
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </>
         )
     }
 </section>
@@ -100,7 +165,19 @@ const sortedTermine = [...termine].sort((a, b) => {
         font-size: 1.1rem;
     }
 
+    .termin-meta {
+        display: flex;
+        gap: 0.75rem;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
     .termin-date {
+        color: var(--muted-text-color);
+        font-size: 0.95rem;
+    }
+
+    .termin-time {
         color: var(--muted-text-color);
         font-size: 0.95rem;
     }
