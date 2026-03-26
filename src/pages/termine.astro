@@ -10,35 +10,55 @@ const parseDate = (str: string): number => {
   return Date.parse(`${year}-${month}-${day}`);
 };
 
+const now = Date.now();
+
 termine.sort(
   (a, b) => parseDate(a.data.date ?? "") - parseDate(b.data.date ?? ""),
 );
+
+const upcoming = termine.filter((t) => parseDate(t.data.date ?? "") >= now);
+const past = termine.filter((t) => parseDate(t.data.date ?? "") < now).reverse();
+const spotlight = upcoming.shift();
 ---
 
 <Layout>
   <h1>Termine und Veranstaltungen</h1>
 
   <ul class="blog-post-card-container">
-    {
-      termine.map((termin, index) =>
-        index === 0 ? (
-          <li class="blog-post spotlight">
-            <Termin_card termin={termin} spotlight={true} />
-          </li>
-        ) : (
-          <li class="blog-post">
-            <Termin_card termin={termin} />
-          </li>
-        ),
-      )
-    }
+    {spotlight && (
+      <li class="blog-post spotlight">
+        <Termin_card termin={spotlight} spotlight={true} />
+      </li>
+    )}
+    {upcoming.map((termin) => (
+      <li class="blog-post">
+        <Termin_card termin={termin} />
+      </li>
+    ))}
   </ul>
+
+  {past.length > 0 && (
+    <h2 class="section-heading">Vergangene Termine</h2>
+    <ul class="blog-post-card-container past">
+      {past.map((termin) => (
+        <li class="blog-post">
+          <Termin_card termin={termin} />
+        </li>
+      ))}
+    </ul>
+  )}
 </Layout>
 
 <style>
   h1 {
     margin-bottom: 1.2rem;
     text-align: center;
+  }
+
+  .section-heading {
+    text-align: center;
+    margin-top: 2.5rem;
+    margin-bottom: 1.2rem;
   }
 
   .blog-post-card-container {

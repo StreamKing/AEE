@@ -68,6 +68,11 @@ const past = [...termine]
                                             {termin.data.time.bis} Uhr
                                         </span>
                                     )}
+                                    {termin.data.location && (
+                                        <span class="termin-location">
+                                            {termin.data.location}
+                                        </span>
+                                    )}
                                 </div>
                             </div>
                             <span class="termin-arrow" aria-hidden="true">
@@ -107,6 +112,11 @@ const past = [...termine]
                                             <span class="termin-time">
                                                 {termin.data.time.von}–
                                                 {termin.data.time.bis} Uhr
+                                            </span>
+                                        )}
+                                        {termin.data.location && (
+                                            <span class="termin-location">
+                                                {termin.data.location}
                                             </span>
                                         )}
                                     </div>
@@ -178,6 +188,11 @@ const past = [...termine]
     }
 
     .termin-time {
+        color: var(--muted-text-color);
+        font-size: 0.95rem;
+    }
+
+    .termin-location {
         color: var(--muted-text-color);
         font-size: 0.95rem;
     }

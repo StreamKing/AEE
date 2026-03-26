@@ -5,6 +5,8 @@ time:
   von: "19:30"
   bis: "22:00"
 description: "Monatliches Treffen der AEE Sulzbach – offener Austausch zu erneuerbaren Energien und aktuellen Projekten."
+location: "Kolleg 3, Feldbergstraße, Sulzbach am Taunus"
+mapsUrl: "https://www.google.com/maps/search/?api=1&query=Feldbergstraße,+Sulzbach+am+Taunus"
 tags: ["Treffen", "Sulzbach"]
 ---
 
