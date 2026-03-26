@@ -35,7 +35,7 @@ export const FUNDINGS = {
       },
       "Maßnahmen zur Herstellung von Dach- und Fassadenbegrünung": {
         policy:
-          "für die Geährung von Zuschüssen zur Herstellung von Dach- und Fassadenbegrünung (Stand 03.11.2021)",
+          "für die Gewährung von Zuschüssen zur Herstellung von Dach- und Fassadenbegrünung (Stand 03.11.2021)",
         description:
           "Für eine Förderung von Dach-und / oder Fassadenbegrünung (kombinierte Förderung möglich) gelten als zuwendungsfähige Kosten die durch Rechnung nachzuweisenden Aufwendungen für Material inkl. Einbaukosten. Planungskosten sind nicht förderfähig. Eine Förderung ist nur bei freiwilligen Maßnahmen möglich.",
         funding:
