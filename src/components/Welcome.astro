@@ -1,5 +1,9 @@
 ---
 import { BASE_URL } from "../../config";
+import TerminList from "./TerminList.astro";
+import { getCollection } from "astro:content";
+
+const termine = await getCollection("termine");
 ---
 
 <section class="hero">
@@ -9,13 +13,9 @@ import { BASE_URL } from "../../config";
     Bei uns dreht sich alles um erneuerbare Energien und die Umwelt in der
     Sulzbacher Gemeinde.
   </h2>
-  <div class="actions">
-    <a class="link-button" href={BASE_URL + "fundings"}>Förderungen ansehen</a>
-    <a class="link-button" href={BASE_URL + "termine"}>Termine</a>
-  </div>
 </section>
 
-<section>
+<section class="mission-statement">
   <h2>Unsere Mission</h2>
   <p>
     Wir setzen uns für eine nachhaltige Energiezukunft ein, indem wir
@@ -23,6 +23,10 @@ import { BASE_URL } from "../../config";
     Sulzbach bieten. Unser Ziel ist es, die Gemeinschaft zu stärken und den
     Übergang zu einer grüneren Zukunft zu fördern.
   </p>
+</section>
+
+<section class="termin-list">
+  <TerminList termine={termine} />
 </section>
 
 <style>
@@ -51,11 +55,16 @@ import { BASE_URL } from "../../config";
     font-weight: 500;
   }
 
-  .actions {
-    margin-top: 1.5rem;
-    display: flex;
-    justify-content: center;
-    gap: 0.8rem;
-    flex-wrap: wrap;
+  .mission-statement {
+    margin: 2rem 0;
+    padding: 1.5rem;
+
+    h2 {
+      margin-top: 0;
+    }
+  }
+
+  .termin-list {
+    margin: 3rem 0;
   }
 </style>

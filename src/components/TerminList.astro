@@ -1,0 +1,119 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { BASE_URL } from "../../config";
+
+interface Props {
+    termine: CollectionEntry<"termine">[];
+}
+
+const { termine } = Astro.props;
+
+const parseDate = (str: string): Date => {
+    const [day, month, year] = str.split(".");
+    return new Date(`${year}-${month}-${day}`);
+};
+
+const sortedTermine = [...termine].sort((a, b) => {
+    if (!a.data.date) return -1;
+    if (!b.data.date) return 1;
+    return parseDate(a.data.date).getTime() - parseDate(b.data.date).getTime();
+});
+---
+
+<section class="termin-list">
+    <h2>Termine und Veranstaltungen</h2>
+    {
+        sortedTermine.length === 0 ? (
+            <p>Keine Termine oder Veranstaltungen vorhanden.</p>
+        ) : (
+            <ul>
+                {sortedTermine.map((termin) => (
+                    <li>
+                        <a
+                            class="termin-card"
+                            href={`${BASE_URL}termine/${termin.id}`}
+                        >
+                            <div class="termin-content">
+                                <h3>{termin.data.title}</h3>
+                                <time class="termin-date">
+                                    {termin.data.date
+                                        ? parseDate(
+                                              termin.data.date,
+                                          ).toLocaleDateString("de-DE", {
+                                              year: "numeric",
+                                              month: "long",
+                                              day: "numeric",
+                                          })
+                                        : "Termin noch nicht festgelegt"}
+                                </time>
+                            </div>
+                            <span class="termin-arrow" aria-hidden="true">
+                                →
+                            </span>
+                        </a>
+                    </li>
+                ))}
+            </ul>
+        )
+    }
+</section>
+
+<style>
+    .termin-list {
+        margin: 2rem 0;
+    }
+
+    .termin-list h2 {
+        margin-bottom: 1.5rem;
+    }
+
+    .termin-list ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .termin-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1rem 1.25rem;
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-lg);
+        background-color: var(--surface-color);
+        box-shadow: var(--shadow-sm);
+        text-decoration: none;
+        color: inherit;
+        transition: border-color 0.15s;
+    }
+
+    .termin-card:hover {
+        border-color: var(--primary-color);
+    }
+
+    .termin-content h3 {
+        margin: 0 0 0.3rem 0;
+        font-size: 1.1rem;
+    }
+
+    .termin-date {
+        color: var(--muted-text-color);
+        font-size: 0.95rem;
+    }
+
+    .termin-arrow {
+        font-size: 1.25rem;
+        flex-shrink: 0;
+        color: var(--muted-text-color);
+        transition: transform 0.15s;
+    }
+
+    .termin-card:hover .termin-arrow {
+        transform: translateX(3px);
+        color: var(--primary-color);
+    }
+</style>

@@ -1,0 +1,64 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+    const termine = await getCollection("termine");
+    return termine.map((termin) => ({
+        params: { id: termin.id },
+        props: { termin },
+    }));
+}
+
+const { termin } = Astro.props;
+const { Content } = await render(termin);
+
+const parseDate = (str: string): Date => {
+    const [day, month, year] = str.split(".");
+    return new Date(`${year}-${month}-${day}`);
+};
+
+const isAfterDate = (): boolean => {
+    if (!termin.data.date) return false;
+    return Date.now() > parseDate(termin.data.date).getTime();
+};
+---
+
+<Layout>
+    <div class="centered">
+        <a class="link-button" href="/termine/">← zurück</a>
+        <div class="header">
+            <h1>{termin.data.title}</h1>
+            <h2>{termin.data.date && termin.data.date}</h2>
+            <p>{!termin.data.date && "Termin noch nicht festgelegt"}</p>
+        </div>
+        {!isAfterDate() && <h4>{termin.data.description}</h4>}
+        <hr />
+        <div>
+            <Content />
+        </div>
+        {isAfterDate() && <hr />}
+        {
+            isAfterDate() && (
+                <details style="cursor:pointer">
+                    <summary style="cursor:pointer">
+                        Vergangene Nachrichten
+                    </summary>
+                    <h4>{termin.data.description}</h4>
+                </details>
+            )
+        }
+    </div>
+</Layout>
+
+<style>
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+    }
+
+    .centered {
+        margin-inline: 12.5%;
+    }
+</style>

@@ -1,18 +1,27 @@
 ---
-const { blogpost } = Astro.props;
-const { spotlight } = Astro.props;
+import type { CollectionEntry } from "astro:content";
+import { render } from "astro:content";
+import { BASE_URL } from "../../config";
+
+interface Props {
+  termin: CollectionEntry<"termine">;
+  spotlight?: boolean;
+}
+
+const { termin, spotlight } = Astro.props;
+const { Content } = await render(termin);
 ---
 
 <div class="card">
   <div class="header">
-    <h2>{blogpost.frontmatter.title}</h2>
-    <h4>{blogpost.frontmatter.date}</h4>
+    <h2>{termin.data.title}</h2>
+    <h4>{termin.data.date}</h4>
   </div>
   <div class="spotlight-content">
-    {spotlight && <Fragment set:html={blogpost.compiledContent()} />}
+    {spotlight && <Content />}
   </div>
-  {!spotlight && blogpost.frontmatter.description}
-  <a class="link-button" href={blogpost.url}>Details →</a>
+  {!spotlight && termin.data.description}
+  <a class="link-button" href={`${BASE_URL}termine/${termin.id}`}>Details →</a>
 </div>
 
 <style>

@@ -1,25 +1,17 @@
 ---
-import BlogCard from "../components/Termin_card.astro";
+import Termin_card from "../components/Termin_card.astro";
 import Layout from "../layouts/Layout.astro";
-const allPosts = Object.entries(
-  import.meta.glob("./termine/*.md", { eager: true }),
-)
-  .filter(([path]) => !path.split("/").pop()!.startsWith("_"))
-  .map(([, post]) => post);
+import { getCollection } from "astro:content";
 
-const stringToSeconds = (str: string): number => {
-  if (!str) return 0;
-  const splitted = str.split(".");
-  const day = splitted[0];
-  const month = splitted[1];
-  const year = splitted[2];
-  const stringDate = `${month}-${day}-${year}`;
-  return Date.parse(stringDate);
+const termine = await getCollection("termine");
+
+const parseDate = (str: string): number => {
+  const [day, month, year] = str.split(".");
+  return Date.parse(`${year}-${month}-${day}`);
 };
 
-allPosts.sort(
-  (a: any, b: any) =>
-    stringToSeconds(a.frontmatter.date) - stringToSeconds(b.frontmatter.date),
+termine.sort(
+  (a, b) => parseDate(a.data.date ?? "") - parseDate(b.data.date ?? ""),
 );
 ---
 
@@ -28,14 +20,14 @@ allPosts.sort(
 
   <ul class="blog-post-card-container">
     {
-      allPosts.map((post: any, index) =>
+      termine.map((termin, index) =>
         index === 0 ? (
           <li class="blog-post spotlight">
-            <BlogCard blogpost={post} spotlight={true} />
+            <Termin_card termin={termin} spotlight={true} />
           </li>
         ) : (
           <li class="blog-post">
-            <BlogCard blogpost={post} />
+            <Termin_card termin={termin} />
           </li>
         ),
       )
