@@ -2,6 +2,7 @@
 import "../colors.css";
 import "../global.css";
 import Layout from "./Layout.astro";
+import LinkButton from "../components/LinkButton.astro";
 const { frontmatter } = Astro.props;
 
 const isAfterDate = (): boolean => {
@@ -17,7 +18,7 @@ const isAfterDate = (): boolean => {
 
 <Layout>
   <div class="centered">
-    <a class="link-button" href="/termine/">← zurück</a>
+    <LinkButton href="/termine/" arrow="left">zurück</LinkButton>
     <div class="header">
       <h1>{frontmatter.title}</h1>
       <h2>{frontmatter.date && frontmatter.date}</h2>

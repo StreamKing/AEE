@@ -1,6 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { getCollection, render } from "astro:content";
+import MapsLink from "../../components/MapsLink.astro";
+import LinkButton from "../../components/LinkButton.astro";
 
 export async function getStaticPaths() {
     const termine = await getCollection("termine");
@@ -26,7 +28,7 @@ const isAfterDate = (): boolean => {
 
 <Layout>
     <div class="centered">
-        <a class="link-button" href="/termine/">← zurück</a>
+        <LinkButton href="/termine/" arrow="left">zurück</LinkButton>
         <div class="header">
             <h1>{termin.data.title}</h1>
             <div class="header-meta">
@@ -51,29 +53,7 @@ const isAfterDate = (): boolean => {
                 <p class="location">
                     {termin.data.location}
                     {termin.data.mapsUrl && (
-                        <a
-                            href={termin.data.mapsUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="Auf Google Maps anzeigen"
-                            class="maps-link"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="20"
-                                height="20"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                aria-hidden="true"
-                            >
-                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
-                                <circle cx="12" cy="9" r="2.5" />
-                            </svg>
-                        </a>
+                        <MapsLink url={termin.data.mapsUrl} size={20} />
                     )}
                 </p>
             )
@@ -102,21 +82,6 @@ const isAfterDate = (): boolean => {
         display: flex;
         justify-content: space-between;
         align-items: baseline;
-    }
-
-    .location {
-        display: flex;
-        align-items: center;
-        gap: 0.4rem;
-    }
-
-    .maps-link {
-        display: inline-flex;
-        color: var(--primary-color);
-    }
-
-    .maps-link:hover {
-        color: var(--primary-hover-color);
     }
 
     .centered {

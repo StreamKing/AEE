@@ -1,0 +1,97 @@
+---
+interface Props {
+    href: string;
+    arrow?: "left" | "right";
+}
+
+const { href, arrow } = Astro.props;
+---
+
+<a class="link-button" href={href}>
+    {
+        arrow === "left" && (
+            <svg
+                class="arrow left"
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+            >
+                <>
+                    <path d="M19 12H5" />
+                    <path d="M12 19l-7-7 7-7" />
+                </>
+            </svg>
+        )
+    }
+    <slot />
+    {
+        arrow === "right" && (
+            <svg
+                class="arrow right"
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+            >
+                <>
+                    <path d="M5 12h14" />
+                    <path d="M12 5l7 7-7 7" />
+                </>
+            </svg>
+        )
+    }
+</a>
+
+<style is:global>
+    .link-button {
+        width: max-content;
+        min-height: 40px;
+        display: inline-flex;
+        align-items: center;
+        padding: 8px 16px;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--primary-color);
+        background-color: var(--primary-color);
+        color: #ffffff;
+        font-weight: 700;
+        text-decoration: none;
+        overflow-wrap: anywhere;
+        transition:
+            background-color 0.2s ease,
+            color 0.2s ease,
+            border-color 0.2s ease,
+            transform 0.2s ease;
+    }
+
+    .link-button:hover {
+        background-color: var(--primary-color-strong);
+        border-color: var(--primary-color-strong);
+        color: #ffffff;
+        transform: translateY(-1px);
+    }
+
+    .arrow {
+        transition: transform 0.2s ease;
+    }
+
+    .link-button:hover .arrow.right {
+        transform: translateX(3px);
+    }
+
+    .link-button:hover .arrow.left {
+        transform: translateX(-3px);
+    }
+</style>

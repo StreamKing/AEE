@@ -4,7 +4,7 @@ import { Image } from "astro:assets";
 import AeeLogo from "../assets/aee_logo.svg";
 ---
 
-<header>
+<header class="centered">
   <a href="/" aria-label="Startseite"
     ><Image class="aee-logo" src={AeeLogo} alt="" />
   </a>
@@ -51,6 +51,7 @@ import AeeLogo from "../assets/aee_logo.svg";
     z-index: 20;
     background-color: var(--header-background-color);
     border-bottom: 1px solid var(--border-color);
+    max-height: fit-content;
 
     .nav-container {
       justify-items: var(--header-justify-nav-container);
@@ -203,6 +204,16 @@ import AeeLogo from "../assets/aee_logo.svg";
         }
       }
     }
+  }
+</style>
+
+<style>
+  header.centered {
+    flex: 1 0 auto;
+    width: min(var(--content-max-width), 100%);
+    margin-inline: auto;
+    max-width: var(--content-max-width-readable);
+    text-align: center;
   }
 </style>
 
