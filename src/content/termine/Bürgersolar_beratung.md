@@ -4,7 +4,7 @@ date: "05.05.2026"
 time:
   von: "19:00"
   bis: "21:00"
-description: "Wir fördern die Ausbildung von Bürgern zu Solarberatern"
+description: "Wir beraten kostenlos zum Thema Photovoltaik in Sulzbach"
 tags: ["Veranstaltung","Sulzbach"]
 ---
 

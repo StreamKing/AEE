@@ -1,7 +1,10 @@
 ---
 import { BASE_URL } from "../../config";
 import TerminList from "./TerminList.astro";
+import EventSpotlight from "./EventSpotlight.astro";
 import { getCollection } from "astro:content";
+import solarberatungImage1 from "../assets/Events/Solarberatung_05_05/1.jpg";
+import solarberatungImage2 from "../assets/Events/Solarberatung_05_05/2.jpg";
 
 const termine = await getCollection("termine");
 ---
@@ -32,6 +35,26 @@ const termine = await getCollection("termine");
   <p>
     E-Mail: <a href="mailto:info@aee-sulzbach.de"> info@aee-sulzbach.de </a>
   </p>
+</section>
+
+<section>
+  <EventSpotlight
+    eventId="Bürgersolar_beratung"
+    recap="Viele gute Fragen und ein reger Austausch prägten unseren Bürgersolarberatungstermin am 5. Mai. Es war großartig, so viele interessierte Bürgerinnen und Bürger zu begrüßen, die sich über die Möglichkeiten der Solarenergie informieren wollten. Unser Team stand bereit, um individuelle Fragen zu beantworten."
+    thanks="an alle die da waren und besonders dem Verein Klimabewusstes Bad Soden e.V."
+    images={[
+      {
+        src: solarberatungImage1.src,
+        alt: "Besucherinnen und Besucher bei der Bürgersolarberatung von hinten fotografiert",
+        caption: "Danke an die zwei Redner für die informative Beratung",
+      },
+      {
+        src: solarberatungImage2.src,
+        alt: "Banner des Vereins Klimabewusstes Bad Soden e.V. bei der Bürgersolarberatung",
+        caption: "Klimabewusstes Bad Soden e.V.",
+      },
+    ]}
+  />
 </section>
 
 <section class="termin-list">

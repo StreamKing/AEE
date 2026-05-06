@@ -1,0 +1,277 @@
+---
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import { BASE_URL } from "../../config";
+
+interface SpotlightImage {
+    src: string;
+    alt: string;
+    caption?: string;
+}
+
+interface Props {
+    eventId?: string;
+    heading?: string;
+    intro?: string;
+    images?: SpotlightImage[];
+    recap?: string;
+    thanks?: string;
+    ctaLabel?: string;
+}
+
+const {
+    eventId,
+    heading = "Unsere letzte Veranstaltung im Rampenlicht",
+    intro = "",
+    images = [],
+    recap,
+    thanks,
+    ctaLabel = "Zum Termin",
+} = Astro.props as Props;
+
+const hasRecapSlot = Astro.slots.has("recap");
+const hasThanksSlot = Astro.slots.has("thanks");
+
+const parseDate = (value?: string): Date | null => {
+    if (!value) return null;
+    const [day, month, year] = value.split(".");
+    if (!day || !month || !year) return null;
+    return new Date(`${year}-${month}-${day}T00:00:00`);
+};
+
+const allTermine: CollectionEntry<"termine">[] = await getCollection("termine");
+const veranstaltungen = allTermine.filter(
+    (termin: CollectionEntry<"termine">) =>
+        termin.data.tags?.some(
+            (tag: string) => tag.trim().toLowerCase() === "veranstaltung",
+        ),
+);
+
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+const sortedByDateDesc = [...veranstaltungen].sort((a, b) => {
+    const aDate = parseDate(a.data.date);
+    const bDate = parseDate(b.data.date);
+    if (!aDate) return 1;
+    if (!bDate) return -1;
+    return bDate.getTime() - aDate.getTime();
+});
+
+const latestPastEvent = sortedByDateDesc.find((termin) => {
+    const date = parseDate(termin.data.date);
+    return date ? date <= today : false;
+});
+
+const fallbackEvent = latestPastEvent ?? sortedByDateDesc[0] ?? null;
+const selectedEvent = eventId
+    ? (veranstaltungen.find(
+          (termin: CollectionEntry<"termine">) => termin.id === eventId,
+      ) ?? fallbackEvent)
+    : fallbackEvent;
+
+const selectedDate = parseDate(selectedEvent?.data.date);
+const formattedDate = selectedDate
+    ? selectedDate.toLocaleDateString("de-DE", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+      })
+    : "Termin noch nicht festgelegt";
+---
+
+<section class="event-spotlight" aria-labelledby="event-spotlight-heading">
+    <h2 id="event-spotlight-heading">{heading}</h2>
+    <p class="intro">{intro}</p>
+
+    {
+        !selectedEvent ? (
+            <p class="empty-state">
+                Aktuell wurde kein Termin mit dem Tag „Veranstaltung" gefunden.
+            </p>
+        ) : (
+            <>
+                <article class="event-card">
+                    <div class="event-main">
+                        <h3>{selectedEvent.data.title}</h3>
+                        <p class="event-meta">{formattedDate}</p>
+                        {selectedEvent.data.location && (
+                            <p class="event-meta">
+                                {selectedEvent.data.location}
+                            </p>
+                        )}
+                        {selectedEvent.data.description && (
+                            <p class="event-description">
+                                {selectedEvent.data.description}
+                            </p>
+                        )}
+                    </div>
+                    <a
+                        class="event-link"
+                        href={`${BASE_URL}termine/${selectedEvent.id}`}
+                    >
+                        {ctaLabel}
+                    </a>
+                </article>
+
+                {(hasRecapSlot || recap) && (
+                    <section class="detail-block" aria-label="Rückblick">
+                        <h3>So war das Event</h3>
+                        <slot name="recap">{recap && <p>{recap}</p>}</slot>
+                    </section>
+                )}
+
+                {images.length > 0 && (
+                    <section class="detail-block" aria-label="Impressionen">
+                        <h3>Impressionen</h3>
+                        <ul class="image-grid">
+                            {images.map((image) => (
+                                <li>
+                                    <figure>
+                                        <img
+                                            src={image.src}
+                                            alt={image.alt}
+                                            loading="lazy"
+                                        />
+                                        {image.caption && (
+                                            <figcaption>
+                                                {image.caption}
+                                            </figcaption>
+                                        )}
+                                    </figure>
+                                </li>
+                            ))}
+                        </ul>
+                    </section>
+                )}
+
+                {(hasThanksSlot || thanks) && (
+                    <section class="detail-block" aria-label="Dank">
+                        <h3>Danke</h3>
+                        <slot name="thanks">{thanks && <p>{thanks}</p>}</slot>
+                    </section>
+                )}
+            </>
+        )
+    }
+</section>
+
+<style>
+    .event-spotlight {
+        margin: 2rem 0;
+        padding: 1.25rem;
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-lg);
+        background: var(--surface-color);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .event-spotlight h2 {
+        margin: 0 0 0.5rem;
+    }
+
+    .intro {
+        margin: 0 0 1rem;
+        color: var(--muted-text-color);
+    }
+
+    .empty-state {
+        margin: 0;
+    }
+
+    .event-card {
+        display: flex;
+        gap: 1rem;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 1rem;
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-lg);
+        background: var(--background-color);
+    }
+
+    .event-main h3 {
+        margin: 0 0 0.4rem;
+    }
+
+    .event-meta {
+        margin: 0;
+        color: var(--muted-text-color);
+        font-size: 0.95rem;
+    }
+
+    .event-description {
+        margin: 0.75rem 0 0;
+    }
+
+    .event-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 2.5rem;
+        padding: 0.4rem 0.9rem;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--primary-color);
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: 600;
+        flex-shrink: 0;
+    }
+
+    .event-link:hover,
+    .event-link:focus-visible {
+        background: var(--primary-color);
+        color: var(--surface-color);
+    }
+
+    .detail-block {
+        margin-top: 1.25rem;
+    }
+
+    .detail-block h3 {
+        margin: 0 0 0.5rem;
+        font-size: 1.1rem;
+    }
+
+    .detail-block p {
+        margin: 0;
+    }
+
+    .image-grid {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 0.75rem;
+    }
+
+    .image-grid figure {
+        margin: 0;
+    }
+
+    .image-grid img {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border-color);
+        display: block;
+    }
+
+    .image-grid figcaption {
+        margin-top: 0.35rem;
+        color: var(--muted-text-color);
+        font-size: 0.9rem;
+    }
+
+    @media (max-width: 640px) {
+        .event-card {
+            flex-direction: column;
+        }
+
+        .event-link {
+            width: 100%;
+        }
+    }
+</style>
