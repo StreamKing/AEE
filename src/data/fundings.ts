@@ -110,10 +110,10 @@ export const FUNDINGS = {
         },
       },
       "Stromspeicher Solaranlagen": {
-        policy: "zu Stromspeichern (Stand 16.07.2024)",
-        description: "Die Bezuschussung von Stromspeichern ist auf eine Förderung je Grundstück beschränkt. Bei besonderen Grundstückskonstellationen (Gebäude steht z.B. auf 2 Grundstücken)werden mehrere Grundstücke als ein (Bau)Grundstück interpretiert.",
-        funding: "125 € / kWh Speicherkapazität. Max. 1250 € / Grundstück",
-        link: "https://cms.sulzbach-taunus.de/media/downloads/RL-Stromspeicher-Stand-16-07-2024.pdf",
+        policy: "zu Stromspeichern (Stand 16.07.2024, redaktionell überarbeitet 12.03.2026)",
+        description: "Antragsberechtigt sind alle privaten, gewerblichen und gemeinnützigen Eigentümer oder Mieter (mit Zustimmung des Eigentümers) von Grundstücken und baulichen Anlagen innerhalb der Gemeinde Sulzbach (Taunus). Die Bezuschussung ist auf eine Förderung je Grundstück beschränkt.",
+        funding: "125 € / kWh (nutzbare Speicherkapazität netto), max. 1.250 € / Grundstück. Für mobile Stromspeicher: 50 % des Kaufpreises, max. 40 € / kWh, wobei maximal 2 kWh förderfähig sind.",
+        link: "https://cms.sulzbach-taunus.de/media/downloads/RL-Stromspeicher-Stand-16-07-2024_ueberarbeitet-12-03-2026.pdf",
         calc: function calc(input: number) {
           const total = input * 0.3;
           if (total > 500) {
