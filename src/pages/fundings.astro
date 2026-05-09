@@ -65,6 +65,14 @@ import Layout from "../layouts/Layout.astro";
 
           .funding-name {
             font-weight: bold;
+            margin-bottom: 0.1rem;
+          }
+
+          .funding-stand {
+            font-size: 0.8rem;
+            color: var(--text-muted, #666);
+            margin-top: 0;
+            margin-bottom: 0.75rem;
           }
 
           h4 {
@@ -75,16 +83,13 @@ import Layout from "../layouts/Layout.astro";
             margin-top: 0;
           }
 
-          h4:has(+ p:empty) {
-            display: none;
-          }
-
           p:empty {
             display: none;
           }
 
           .link-button {
             margin-top: auto;
+            padding-top: 1rem;
             align-self: flex-start;
           }
         }
@@ -109,21 +114,17 @@ import Layout from "../layouts/Layout.astro";
         FUNDINGS["cities"]["sulzbach"] as { [key: string]: FundingEntry }
       )[fundingName];
 
-      const fundingCalculator = funding?.calc ? `` : "";
-
       const fundingDiv = document.createElement("div");
 
       fundingDiv.classList.add("funding-card");
       fundingDiv.innerHTML = `
       <h3 class="funding-name">${fundingName}</h3>
-      <h4 class="funding-description-title">Beschreibung</h4>
+      <p class="funding-stand">${funding.stand}</p>
+      <h4>Beschreibung</h4>
       <p class="funding-description">${funding.description}</p>
-      <h4>Richtlinien</h4>
-      <p class="funding-policy">${funding.policy}</p>
       <h4>Höhe der Förderung</h4>
       <p class="funding-funding">${funding.funding}</p>
-      ${fundingCalculator}
-      <a class="link-button" href="${funding.link}">Download PDF</a>
+      <a class="link-button" href="${funding.link}" target="_blank" rel="noopener noreferrer">Richtlinie herunterladen (PDF)</a>
     `;
 
       document.querySelector(".fundings")?.appendChild(fundingDiv);
@@ -136,12 +137,12 @@ import Layout from "../layouts/Layout.astro";
         if (
           fundingName.toLowerCase().includes(keyword) ||
           funding.description.toLowerCase().includes(keyword) ||
-          funding.policy.toLowerCase().includes(keyword) ||
+          funding.stand.toLowerCase().includes(keyword) ||
           funding.funding.toLowerCase().includes(keyword)
         ) {
           const result = new RegExp(keyword, "gi");
           const fundingDescriptions = fundingDiv.querySelectorAll(
-            ".funding-name, .funding-description, .funding-policy, .funding-funding",
+            ".funding-name, .funding-description, .funding-stand, .funding-funding",
           );
           fundingDescriptions.forEach((element) => {
             element.innerHTML = element.textContent?.replace(

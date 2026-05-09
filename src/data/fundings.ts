@@ -2,166 +2,82 @@ export const FUNDINGS = {
   cities: {
     sulzbach: {
       "Private Trinkwasserenthärtungsanlagen": {
-        policy:
-          "für private Trinkwasserenthärtungsanlagen (Entkalkungsanlagen) (Stand 03.11.2021)",
+        stand: "Stand 03.11.2021, zuletzt redaktionell bearbeitet am 05.07.2023",
         description:
-          "Anlagen, deren Wirkungsweise nach DVGW-Kriterien geprüft sind oder gleichwertig wirkungsvoll arbeiten, geltenden Vorschriften, technischen Regeln und Anforderungen nach aktuellem Stand der Technik entsprechen und an das Wasserversorgungsnetz angeschlossen sind.",
-        funding:
-          "30 % des Kaufpreises, maximal jedoch 500 €, 1 Anlage pro Hausanschluss",
+          "Gefördert werden Entkalkungsanlagen, die nach DVGW-Kriterien geprüft sind, den geltenden technischen Regeln entsprechen und an das Wasserversorgungsnetz angeschlossen sind. Pro Hausanschluss ist nur eine Anlage förderfähig.",
+        funding: "30 % des Kaufpreises, maximal jedoch 500,00 €. 1 Anlage pro Hausanschluss.",
         link: "https://cms.sulzbach-taunus.de/media/downloads/RL-Trinkwasserenthaertungsanlagen-Stand-03_11_2021zuletzt-geaendert-am-05-07-2023.pdf",
-        calc: function calc(input: number) {
-          const total = input * 0.3;
-          if (total > 500) {
-            return 500;
-          }
-          return total;
-        },
       },
       Entsiegelungsmaßnahmen: {
-        policy:
-          "zum Rückbau von versiegelten (überbauten und wasserundurchlässig befestigten) Flächen (Entsiegelungsmaßnahmen) (Stand 03.11.2021)",
+        stand: "Stand 03.11.2021, zuletzt redaktionell bearbeitet am 05.07.2023",
         description:
-          "Für eine Förderung gelten als zuwendungsfähige Kosten die durch Rechnung nachzuweisenden Aufwendungen für Material inkl. Einbaukosten. Planungskosten sind nicht förderfähig. Eine Förderung ist nur bei freiwilligen Maßnahmen möglich.",
-        funding:
-          "50 % der Kosten, maximal jedoch 12,50 € / qm entsiegelter Fläche",
+          "Gefördert wird der freiwillige Rückbau von versiegelten, wasserundurchlässig befestigten Flächen. Zuwendungsfähig sind Material- und Einbaukosten; Planungskosten sind nicht förderfähig.",
+        funding: "Der Zuschuss beträgt 50 % der Kosten, maximal jedoch 12,50 € / qm entsiegelter Fläche. Die maximale Zuschusssumme wird hierbei jedoch auf 500,00 € gedeckelt.",
         link: "https://cms.sulzbach-taunus.de/media/downloads/RL-Entsiegelung-Stand-03_11_2021-zuletzt-bearbeitet-am-05-07-2023.pdf",
-        calc: function calc(input: number) {
-          const total = input * 0.3;
-          if (total > 500) {
-            return 500;
-          }
-          return total;
-        },
       },
-      "Maßnahmen zur Herstellung von Dach- und Fassadenbegrünung": {
-        policy:
-          "für die Gewährung von Zuschüssen zur Herstellung von Dach- und Fassadenbegrünung (Stand 03.11.2021)",
+      "Dach- und Fassadenbegrünung": {
+        stand: "Stand 03.11.2021, zuletzt redaktionell bearbeitet am 05.07.2023",
         description:
-          "Für eine Förderung von Dach-und / oder Fassadenbegrünung (kombinierte Förderung möglich) gelten als zuwendungsfähige Kosten die durch Rechnung nachzuweisenden Aufwendungen für Material inkl. Einbaukosten. Planungskosten sind nicht förderfähig. Eine Förderung ist nur bei freiwilligen Maßnahmen möglich.",
-        funding:
-          "Dachbegrünung: 50 % der Kosten, maximal jedoch 15 € / qm extensiver Dachbegrünung, sowie 25 € / qm bei intensiver Dachbegrünung. Fassadenbegrünung: 50 % der Kosten, maximal jedoch 15 € / qm extensiver Fassadenbegrünung.",
+          "Gefördert wird die freiwillige Begrünung von Dächern und Fassaden, auch in Kombination. Zuwendungsfähig sind Material- und Einbaukosten; Planungskosten sind nicht förderfähig.",
+        funding: "Dachbegrünung: 50 % der Kosten, maximal jedoch 15 € / qm extensiver Dachbegrünung sowie 25 € / qm bei intensiver Dachbegründung. Fassadenbegrünung: 50 % der Kosten, maximal jedoch 15 € / qm extensiver Fassadenbegrünung.",
         link: "https://cms.sulzbach-taunus.de/media/downloads/RL-Dach-und-Fassadenbegruendung-Stand-03_11_2021-zuletzt-bearbeitet-am-05-07-2023.pdf",
-        calc: function calc(input: number) {
-          const total = input * 0.3;
-          if (total > 500) {
-            return 500;
-          }
-          return total;
-        },
       },
       "E-Lastenräder": {
-        policy: "beim Neukauf von E-Lastenrädern (Stand 03.11.2021)",
+        stand: "Stand 03.11.2021, zuletzt redaktionell bearbeitet am 17.05.2022",
         description:
-          "Die Förderung ist auf ein E-Lastenmotor je Haushalt / Gewerbebetrieb beschränkt.",
-        funding: "30 % des Kaufpreises, maximal jedoch 500 €",
+          "Gefördert wird der Neukauf von E-Lastenrädern für Privatpersonen mit Erstwohnsitz in Sulzbach sowie dort gemeldete Gewerbebetriebe. Die Förderung ist auf ein E-Lastenrad je Haushalt bzw. Gewerbebetrieb beschränkt.",
+        funding: "Der Zuschuss beträgt 30 % des Kaufpreises, maximal jedoch 500,00 €.",
         link: "https://cms.sulzbach-taunus.de/media/downloads/RL-E-Lastenraeder-Stand-03_11_2021-zuletzt-bearbeitet-am-05-07-2023.pdf",
-        calc: function calc(input: number) {
-          const total = input * 0.3;
-          if (total > 500) {
-            return 500;
-          }
-          return total;
-        },
       },
       "Höchst-effiziente Haushaltsgeräte": {
-        policy:
-          "beim Neukauf von höchst-effizienten Haushaltsgeräten (Stand 03.11.2021) ",
+        stand: "Stand 03.11.2021, zuletzt redaktionell bearbeitet am 05.07.2023",
         description:
-          'Großgeräte Elektroherd, Kühlschrank, Gefrierschrank, Gefriertruhe, Geschirrspülmaschine, Waschmaschine sowie Wäschetrockner (sog. Große Weißware ") mit der Energieeffizienzklasse A (gem. dem am 01.03.2021 neu in Kraft getretenen neuen Energielabel, ehemals Energieeffizienzklasse A+++)',
-        funding:
-          "15 % des Kaufpreises (ohne Lieferung und Installation). maximal jedoch 150 €. Die Förderung ist beschränkt auf insgesamt 1 Gerät pro Jahr und Haushalt.",
+          "Gefördert wird der Neukauf von Großgeräten (Elektroherd, Kühlschrank, Gefrierschrank, Gefriertruhe, Geschirrspülmaschine, Waschmaschine, Wäschetrockner) mit der Energieeffizienzklasse A gemäß dem seit 01.03.2021 geltenden Energielabel.",
+        funding: "Der Zuschuss beträgt 15 % des Kaufpreises (ohne Lieferung und Installation), maximal jedoch 150,00 €. Die Förderung ist beschränkt auf insgesamt 1 Gerät pro Jahr und Haushalt.",
         link: "https://cms.sulzbach-taunus.de/media/downloads/RL-Haushaltsgeraete-Stand-03_11_2021-zuletzt-bearbeitet-am-05.07.2023.pdf",
-        calc: function calc(input: number) {
-          const total = input * 0.3;
-          if (total > 500) {
-            return 500;
-          }
-          return total;
-        },
       },
       "Steckbare Mini-PV-Anlagen / Balkonmodule": {
-        policy:
-          "zu steckbaren Mini-PV Anlagen / Balkonmodule (Stand 16.07.2024)",
+        stand: "Stand 16.07.2024",
         description:
-          "Gefördert werden steckbare Mini-PV Anlagen / Balkonmodule, die alle anzuwendenden Normen für fest installierte Stromerzeugungsgeräte / VDE-Normen erfüllen. Für den Anschluss der Anlage ist ein Wieland-Stecker zu verwenden.",
-        funding:
-          "100 € / Modul, maximal jedoch 50 % des Kaufpreises. Die 2 Module pro Wohneinheit.",
+          "Gefördert werden steckbare Mini-PV-Anlagen und Balkonmodule, die alle anzuwendenden VDE-Normen erfüllen. Antragsberechtigt sind Eigentümer oder Mieter von Wohnungen und baulichen Anlagen in Sulzbach.",
+        funding: "Der Zuschuss beträgt pauschal 100,00 € / Modul, maximal jedoch 50 % des Kaufpreises. Max. 2 Module pro Wohneinheit.",
         link: "https://cms.sulzbach-taunus.de/media/downloads/RL-Balkonmodule-Stand-16-07-2024.pdf",
-        calc: function calc(input: number) {
-          const total = input * 0.3;
-          if (total > 500) {
-            return 500;
-          }
-          return total;
-        },
       },
-      "Photovoltaik-anlagen": {
-        policy: "für Photovoltaik-anlagen (Stand 16.07.2024)",
-        description: "Die Bezuschussung von Photovoltaikanlagen ist auf eine Förderung je Grundstück beschränkt. Bei besonderen Grundstückskonstellationen (Gebäude steht z.B. auf 2 Grundstücken) werden mehrere Grundstücke als ein (Bau)Grundstück interpretiert.",
-        funding:
-          "100 € / kWp, max. 1.000 € / Anlage. Die Bezuschussung von Photovoltaikanlagen ist auf eine Förderung je Grundstück beschränkt.",
+      "Photovoltaikanlagen": {
+        stand: "Stand 16.07.2024",
+        description:
+          "Gefördert wird die Errichtung von Photovoltaikanlagen auf Liegenschaften in Sulzbach. Antragsberechtigt sind Eigentümer sowie Mieter mit Zustimmung des Eigentümers. Die Förderung ist auf eine Anlage je Grundstück beschränkt.",
+        funding: "Der Zuschuss beträgt 100,00 € pro Kilowatt-Peak (kWp), maximal jedoch 1.000,00 € / Anlage.",
         link: "https://cms.sulzbach-taunus.de/media/downloads/RL-Photovoltaikanlagen-Stand-16-07-2024.pdf",
-        calc: function calc(input: number) {
-          const total = input * 0.3;
-          if (total > 500) {
-            return 500;
-          }
-          return total;
-        },
       },
-      "Stromspeicher Solaranlagen": {
-        policy: "zu Stromspeichern (Stand 16.07.2024, redaktionell überarbeitet 12.03.2026)",
-        description: "Antragsberechtigt sind alle privaten, gewerblichen und gemeinnützigen Eigentümer oder Mieter (mit Zustimmung des Eigentümers) von Grundstücken und baulichen Anlagen innerhalb der Gemeinde Sulzbach (Taunus). Die Bezuschussung ist auf eine Förderung je Grundstück beschränkt.",
-        funding: "125 € / kWh (nutzbare Speicherkapazität netto), max. 1.250 € / Grundstück. Für mobile Stromspeicher: 50 % des Kaufpreises, max. 40 € / kWh, wobei maximal 2 kWh förderfähig sind.",
+      "Stromspeicher": {
+        stand: "Stand 16.07.2024, redaktionell überarbeitet am 12.03.2026",
+        description:
+          "Gefördert wird die Errichtung von Stromspeichern sowie der Kauf mobiler Stromspeicher. Antragsberechtigt sind private, gewerbliche und gemeinnützige Eigentümer oder Mieter (mit Zustimmung des Eigentümers) in Sulzbach. Die Förderung ist auf eine Förderung je Grundstück beschränkt.",
+        funding: "Der Zuschuss beträgt 125,00 € / kWh (nutzbare Speicherkapazität netto), maximal jedoch 1.250,00 €. Der Zuschuss für mobile Stromspeicher beträgt 50 % des Kaufpreises, höchstens jedoch 40,00 € / kWh (nutzbare Speicherkapazität netto), wobei maximal 2 kWh förderfähig sind.",
         link: "https://cms.sulzbach-taunus.de/media/downloads/RL-Stromspeicher-Stand-16-07-2024_ueberarbeitet-12-03-2026.pdf",
-        calc: function calc(input: number) {
-          const total = input * 0.3;
-          if (total > 500) {
-            return 500;
-          }
-          return total;
-        },
       },
-      "Solaranlagen zur Warmwasseraufbereitung und zur Heizungsunterstützung": {
-        policy:
-          "Zuschüsse zum Bau von Solaranlagen zur Warmwasseraufbereitung und zur Heizungsunterstützung.",
+      "Solaranlagen zur Warmwasseraufbereitung und Heizungsunterstützung": {
+        stand: "Stand 30.05.2017, zuletzt redaktionell bearbeitet am 05.07.2023",
         description:
-          "Solarthermie bedeutet Sonnenenergie zur Wärmegewinnung (Warmwasser- und / oder Heizungsunterstützung) zu nutzen. Haushalte mit einem erhöhten Warmwasserbedarf können besonders von solarthermischen Anlagen profitieren und spürbar Energiekosten sparen.",
-        funding:
-          "50 € / qm Flachkollektorfläche. 80 € / qm Röhrenkollektor. Max. jedoch mit 300,00 € für Warmwasseraufbereitung je Objekt / Gebäude und max. 500 € für Heizungsunterstützung je Objekt / Gebäude.",
+          "Gefördert wird der Bau von Solarthermieanlagen zur Warmwasserbereitung und/oder Heizungsunterstützung auf Liegenschaften in Sulzbach.",
+        funding: "50,00 € / qm Flachkollektorfläche. 80,00 € / qm Röhrenkollektor. Max. jedoch mit 300,00 € für Warmwasseraufbereitung und max. 500,00 € für Heizungsunterstützung.",
         link: "https://cms.sulzbach-taunus.de/media/downloads/RL-Solaranlagen-WarmwasserHeizung-Stand-30_05_2017-zuletzt-bearbeitet-am-05-07-2023.pdf",
-        calc: function calc(input: number) {
-          const total = input * 0.3;
-          if (total > 500) {
-            return 500;
-          }
-          return total;
-        },
       },
-      "Neuerrichtung von Niederschlagswassersammelanlagen (Zisternenförderung)": {
-        policy:
-          "Zuschüsse zur freiwilligen Neuerrichtung von Niederschlagswassersammelanlagen (Zisternenförderung).",
+      "Zisternenförderung": {
+        stand: "Stand 06.03.2025",
         description:
-          "Antragsberechtigt sind alle privaten und gewerblichen Eigentümer von bebauten bzw. überbauten Grundstücken innerhalb der Gemeinde Sulzbach(Taunus).",
-        funding:
-          "Der Zuschuss beträgt 200,00 € / m³ gebauter Zisterne, maximal jedoch 2.000,00 €. Je Grundstück ist höchstens die Förderung einer Zisterne möglich. ",
+          "Gefördert wird die freiwillige Neuerrichtung von Regenwassersammelanlagen auf bebauten Grundstücken in Sulzbach. Antragsberechtigt sind private und gewerbliche Eigentümer. Je Grundstück ist nur eine Zisterne förderfähig.",
+        funding: "Der Zuschuss beträgt 200,00 € / m³ gebauter Zisterne, maximal jedoch 2.000,00 €. Je Grundstück ist höchstens die Förderung einer Zisterne möglich.",
         link: "https://cms.sulzbach-taunus.de/media/downloads/RL-Zisternenfoerderung-Stand-06_03_2025.pdf",
-        calc: function calc(input: number) {
-          const total = input * 0.3;
-          if (total > 500) {
-            return 500;
-          }
-          return total;
-        },
       },
     },
   },
 };
 
 export interface FundingEntry {
-  policy: string;
+  stand: string;
   description: string;
   funding: string;
   link?: string;
-  calc?: (input: number) => number;
 }
