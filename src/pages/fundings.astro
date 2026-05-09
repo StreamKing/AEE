@@ -87,9 +87,24 @@ import Layout from "../layouts/Layout.astro";
             display: none;
           }
 
+          .details-button {
+            background: none;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 0.4rem 0.75rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            align-self: flex-start;
+          }
+
+          .details-button:hover {
+            background-color: var(--border-color);
+          }
+
           .link-button {
             margin-top: auto;
-            padding-top: 1rem;
+            padding-top: 0.5rem;
             align-self: flex-start;
           }
         }
@@ -104,6 +119,58 @@ import Layout from "../layouts/Layout.astro";
         align-items: stretch;
       }
     }
+
+    :global(.funding-popover) {
+      box-sizing: border-box;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      background-color: var(--surface-color);
+      box-shadow: var(--shadow-sm);
+      padding: 1.5rem;
+      margin: auto;
+      width: min(calc(100vw - 2rem), 640px);
+      max-width: 640px;
+      min-width: 0;
+      max-height: min(85dvh, 760px);
+      overflow: auto;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      hyphens: auto;
+    }
+
+    :global(.funding-popover:popover-open) {
+      inset: 0;
+      margin: auto;
+      width: min(calc(100vw - 2rem), 640px);
+      max-width: 640px;
+    }
+
+    :global(.funding-popover)::backdrop {
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    :global(.funding-popover h3) {
+      margin-top: 0;
+    }
+
+    :global(.funding-popover h4) {
+      margin-bottom: 0.25rem;
+    }
+
+    :global(.funding-popover h4 + p) {
+      margin-top: 0;
+    }
+
+    :global(.funding-popover .popover-close) {
+      float: right;
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      line-height: 1;
+      padding: 0.25rem 0.5rem;
+      margin: -0.25rem -0.5rem 0 0;
+    }
   </style>
 
   <script>
@@ -116,14 +183,28 @@ import Layout from "../layouts/Layout.astro";
 
       const fundingDiv = document.createElement("div");
 
+      const popoverId = `popover-${Math.random().toString(36).slice(2)}`;
+
+      const popoverEl = document.createElement("div");
+      popoverEl.id = popoverId;
+      popoverEl.classList.add("funding-popover");
+      popoverEl.setAttribute("popover", "");
+      popoverEl.innerHTML = `
+        <button class="popover-close" popovertarget="${popoverId}" popovertargetaction="hide" aria-label="Schließen">✕</button>
+        <h3>${fundingName}</h3>
+        <p class="funding-stand">${funding.stand}</p>
+        <h4>Beschreibung</h4>
+        <p class="funding-description">${funding.description}</p>
+        <h4>Höhe der Förderung</h4>
+        <p class="funding-funding">${funding.funding}</p>
+      `;
+      document.body.appendChild(popoverEl);
+
       fundingDiv.classList.add("funding-card");
       fundingDiv.innerHTML = `
       <h3 class="funding-name">${fundingName}</h3>
       <p class="funding-stand">${funding.stand}</p>
-      <h4>Beschreibung</h4>
-      <p class="funding-description">${funding.description}</p>
-      <h4>Höhe der Förderung</h4>
-      <p class="funding-funding">${funding.funding}</p>
+      <button class="details-button" popovertarget="${popoverId}">Details anzeigen</button>
       <a class="link-button" href="${funding.link}" target="_blank" rel="noopener noreferrer">Richtlinie herunterladen (PDF)</a>
     `;
 
@@ -142,7 +223,7 @@ import Layout from "../layouts/Layout.astro";
         ) {
           const result = new RegExp(keyword, "gi");
           const fundingDescriptions = fundingDiv.querySelectorAll(
-            ".funding-name, .funding-description, .funding-stand, .funding-funding",
+            ".funding-name, .funding-stand",
           );
           fundingDescriptions.forEach((element) => {
             element.innerHTML = element.textContent?.replace(
