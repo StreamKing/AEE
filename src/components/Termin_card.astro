@@ -4,6 +4,7 @@ import { render } from "astro:content";
 import { BASE_URL } from "../../config";
 import MapsLink from "./MapsLink.astro";
 import LinkButton from "./LinkButton.astro";
+import CalendarLink from "./CalendarLink.astro";
 
 interface Props {
   termin: CollectionEntry<"termine">;
@@ -13,6 +14,45 @@ interface Props {
 
 const { termin, spotlight, skipDetails } = Astro.props;
 const { Content } = await render(termin);
+
+const escapeIcalText = (value: string) =>
+  value.replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\r?\n/g, "\\n");
+
+const formatIcalDate = (date: string) => {
+  const [day, month, year] = date.split(".");
+  return `${year}${month}${day}`;
+};
+
+const formatIcalDateTime = (date: string, time: string) =>
+  `${formatIcalDate(date)}T${time.replace(":", "")}00`;
+
+const calendarUrl = termin.data.date
+  ? `data:text/calendar;charset=utf-8,${encodeURIComponent(
+      [
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        "PRODID:-//AEE Sulzbach//Termine//DE",
+        "BEGIN:VEVENT",
+        `UID:${termin.id}@aee-sulzbach.de`,
+        `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "")}`,
+        termin.data.time
+          ? `DTSTART:${formatIcalDateTime(termin.data.date, termin.data.time.von)}`
+          : `DTSTART;VALUE=DATE:${formatIcalDate(termin.data.date)}`,
+        ...(termin.data.time
+          ? [`DTEND:${formatIcalDateTime(termin.data.date, termin.data.time.bis)}`]
+          : []),
+        `SUMMARY:${escapeIcalText(termin.data.title)}`,
+        ...(termin.data.description
+          ? [`DESCRIPTION:${escapeIcalText(termin.data.description)}`]
+          : []),
+        ...(termin.data.location
+          ? [`LOCATION:${escapeIcalText(termin.data.location)}`]
+          : []),
+        "END:VEVENT",
+        "END:VCALENDAR",
+      ].join("\r\n"),
+    )}`
+  : undefined;
 ---
 
 <div class="card">
@@ -56,6 +96,11 @@ const { Content } = await render(termin);
       <LinkButton href={`${BASE_URL}termine/${termin.id}`} arrow="right">
         Details
       </LinkButton>
+    )
+  }
+  {
+    calendarUrl && (
+      <CalendarLink href={calendarUrl} filename={`${termin.id}.ics`} />
     )
   }
 </div>
@@ -105,4 +150,5 @@ const { Content } = await render(termin);
   .card:has(.spotlight-content > *) .spotlight-content {
     display: block;
   }
+
 </style>
