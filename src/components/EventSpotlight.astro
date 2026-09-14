@@ -10,6 +10,7 @@ interface SpotlightImage {
 }
 
 interface Props {
+    pastEvent?: boolean;
     eventId?: string;
     heading?: string;
     intro?: string;
@@ -21,7 +22,10 @@ interface Props {
 
 const {
     eventId,
-    heading = "Unsere letzte Veranstaltung im Rampenlicht",
+    pastEvent,
+    heading = pastEvent
+        ? "Unsere letzte Veranstaltung im Rampenlicht"
+        : "Unsere nächste Veranstaltung",
     intro = "",
     images = [],
     recap,

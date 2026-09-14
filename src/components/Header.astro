@@ -5,8 +5,8 @@ import AeeLogo from "../assets/new_logo/bild_logo.svg";
 ---
 
 <header class="centered">
-  <a href="/" aria-label="Startseite"
-    ><Image class="aee-logo" src={AeeLogo} alt="" />
+  <a href="/" aria-label="Startseite">
+    <Image class="aee-logo" src={AeeLogo} alt="" />
   </a>
   <div class="nav-container">
     <button
@@ -17,11 +17,7 @@ import AeeLogo from "../assets/new_logo/bild_logo.svg";
       aria-label="Menü öffnen"
     >
       <span class="menu-toggle-label">Menü</span>
-      <span class="menu-toggle-icon" aria-hidden="true">
-        <span></span>
-        <span></span>
-        <span></span>
-      </span>
+      <span class="menu-toggle-icon" aria-hidden="true"> </span>
     </button>
     <nav
       id="site-navigation"
@@ -33,7 +29,7 @@ import AeeLogo from "../assets/new_logo/bild_logo.svg";
         <li><a href={BASE_URL}>Start</a></li>
         <li><a href={BASE_URL + "about"}>Über uns</a></li>
         <li><a href={BASE_URL + "fundings"}>Förderungen</a></li>
-
+        <li><a href={BASE_URL + "solar"}>Solarberatung</a></li>
         <li><a href={BASE_URL + "termine"}>Termine</a></li>
       </ul>
     </nav>
