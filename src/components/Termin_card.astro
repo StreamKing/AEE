@@ -8,9 +8,10 @@ import LinkButton from "./LinkButton.astro";
 interface Props {
   termin: CollectionEntry<"termine">;
   spotlight?: boolean;
+  skipDetails?: boolean;
 }
 
-const { termin, spotlight } = Astro.props;
+const { termin, spotlight, skipDetails } = Astro.props;
 const { Content } = await render(termin);
 ---
 
@@ -24,16 +25,39 @@ const { Content } = await render(termin);
       spotlight && termin.data.location && (
         <p class="location">
           <strong>Wo:</strong> {termin.data.location}
-          {termin.data.mapsUrl && <MapsLink url={termin.data.mapsUrl} />}
+          {termin.data.mapsUrl && <MapsLink url={termin.data.mapsUrl!} />}
+        </p>
+      )
+    }
+    {
+      spotlight && termin.data.date && (
+        <p class="location">
+          <strong>Wann:</strong> {termin.data.date}
+        </p>
+      )
+    }
+    {
+      spotlight && termin.data.time && (
+        <p class="location">
+          <strong>Uhrzeit:</strong> {termin.data.time.von} -{" "}
+          {termin.data.time.bis}
         </p>
       )
     }
     {spotlight && <Content />}
   </div>
-  {!spotlight && termin.data.description && <p>{termin.data.description}</p>}
-  <LinkButton href={`${BASE_URL}termine/${termin.id}`} arrow="right"
-    >Details</LinkButton
-  >
+  {
+    !spotlight && !skipDetails && termin.data.description && (
+      <p>{termin.data.description}</p>
+    )
+  }
+  {
+    !skipDetails && (
+      <LinkButton href={`${BASE_URL}termine/${termin.id}`} arrow="right">
+        Details
+      </LinkButton>
+    )
+  }
 </div>
 
 <style>

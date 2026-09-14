@@ -21,7 +21,7 @@ const termin = eventId
     <h3 id="event-spotlight-heading">{heading}</h3>
     {
         termin ? (
-            <Termin_card termin={termin} spotlight={true} />
+            <Termin_card termin={termin} spotlight={true} skipDetails={true} />
         ) : (
             <p class="empty-state">
                 Der ausgewählte Termin wurde nicht gefunden.
@@ -34,12 +34,11 @@ const termin = eventId
     .event-spotlight {
         margin: 2rem 0;
         padding: 1.25rem;
-        box-shadow: var(--shadow-sm);
     }
 
-    .event-spotlight h2 {
+    .event-spotlight h3 {
         margin: 0 0 0.5rem;
-        text-align: center;
+        text-align: left;
     }
 
     .empty-state {
@@ -49,15 +48,16 @@ const termin = eventId
 
     .event-spotlight :global(.card) {
         align-items: center;
-        text-align: center;
+        text-align: left;
     }
 
     .event-spotlight :global(.card > .header) {
         width: 100%;
         justify-content: center;
+        text-align: center;
     }
 
     .event-spotlight :global(.card .location) {
-        text-align: center;
+        text-align: left;
     }
 </style>
