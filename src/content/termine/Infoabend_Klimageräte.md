@@ -12,6 +12,7 @@ tags: ["Veranstaltung","Sulzbach"]
 
 Ein ganze Infoabend über Klimageräte, wir zeigen euch was geht und was nicht geht. Außerdem klären wir eure Fragen. 
 
+![Plakat Bürgersolarberatung](/src/assets/Events/Infoabend_Klimageräte/plakat.png)
 
 
 Wir freuen uns auf euer kommen am Freitag!

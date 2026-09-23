@@ -16,7 +16,11 @@ const { termin, spotlight, skipDetails } = Astro.props;
 const { Content } = await render(termin);
 
 const escapeIcalText = (value: string) =>
-  value.replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\r?\n/g, "\\n");
+  value
+    .replace(/\\/g, "\\\\")
+    .replace(/;/g, "\\;")
+    .replace(/,/g, "\\,")
+    .replace(/\r?\n/g, "\\n");
 
 const formatIcalDate = (date: string) => {
   const [day, month, year] = date.split(".");
@@ -34,12 +38,17 @@ const calendarUrl = termin.data.date
         "PRODID:-//AEE Sulzbach//Termine//DE",
         "BEGIN:VEVENT",
         `UID:${termin.id}@aee-sulzbach.de`,
-        `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "")}`,
+        `DTSTAMP:${new Date()
+          .toISOString()
+          .replace(/[-:]/g, "")
+          .replace(/\.\d{3}/, "")}`,
         termin.data.time
           ? `DTSTART:${formatIcalDateTime(termin.data.date, termin.data.time.von)}`
           : `DTSTART;VALUE=DATE:${formatIcalDate(termin.data.date)}`,
         ...(termin.data.time
-          ? [`DTEND:${formatIcalDateTime(termin.data.date, termin.data.time.bis)}`]
+          ? [
+              `DTEND:${formatIcalDateTime(termin.data.date, termin.data.time.bis)}`,
+            ]
           : []),
         `SUMMARY:${escapeIcalText(termin.data.title)}`,
         ...(termin.data.description
@@ -145,10 +154,12 @@ const calendarUrl = termin.data.date
         margin: 0 0 0.4rem;
       }
     }
+    img {
+      width: 100%;
+    }
   }
 
   .card:has(.spotlight-content > *) .spotlight-content {
     display: block;
   }
-
 </style>
