@@ -1,81 +1,51 @@
 ---
 import "../colors.css";
 import "../global.css";
-import Nav from "../components/Nav.astro";
-import { Image } from "astro:assets";
-import AeeLogo from "../assets/aee_logo.svg";
+import Header from "../components/structure/Header.astro";
+import Footer from "../components/structure/Footer.astro";
+import Main from "../components/Main.astro";
+
+const { centered } = Astro.props;
+
+const layout = centered ? "centered" : "full-width";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="de">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/bild_logo.svg" />
     <meta name="generator" content={Astro.generator} />
 
-    <title>Astro Basics</title>
+    <title>AEE Sulzbach</title>
   </head>
   <body>
-    <header>
-      <Image class="aee-logo" src={AeeLogo} alt="" />
-      <Nav />
-    </header>
-    <main>
+    <Header />
+    <Main layout={layout}>
       <slot />
-    </main>
-    <footer><p>&copy; {new Date().getFullYear()} Stefan Geiger</p></footer>
+    </Main>
+    <Footer />
   </body>
 </html>
 
 <style>
-  .nav-container {
-    display: flex;
-    justify-content: end;
-  }
-</style>
-
-<style>
   html,
   body {
-    container-type: inline-size;
     margin: 0;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+    min-height: 100dvh;
 
     background-color: var(--background-color);
 
-    --header-grid-columns: min-content auto;
-    --header-justify-nav-container: end;
-    @container (max-width: 521px) {
-      header {
-        --header-grid-columns: auto;
-        --header-justify-nav-container: start;
-      }
-    }
+    --header-grid-columns: min-content 1fr;
+    --header-justify-nav-container: flex-end;
   }
 
-  header {
-    display: grid;
-    grid-template-columns: var(--header-grid-columns);
-
-    .nav-container {
-      justify-items: var(--header-justify-nav-container);
+  @media (max-width: 700px) {
+    html,
+    body {
+      --header-grid-columns: min-content 1fr;
+      --header-justify-nav-container: flex-end;
     }
-
-    .aee-logo {
-      height: 72px;
-      width: fit-content;
-    }
-  }
-
-  main {
-    flex: 1;
-  }
-</style>
-
-<style>
-  body {
   }
 </style>

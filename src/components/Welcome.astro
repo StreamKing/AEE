@@ -1,42 +1,86 @@
 ---
+import { getCollection } from "astro:content";
+import UpCompingEvent from "./UpCompingEvent.astro";
+import TerminList from "./termin/TerminList.astro";
 
+const termine = await getCollection("termine");
 ---
 
-<h1>Willkommen auf unserer Webseite</h1>
+<section class="hero">
+  <p class="badge">Energie vor Ort</p>
+  <h1>Willkommen bei AEE Sulzbach</h1>
+  <h2>
+    Bei uns dreht sich alles um erneuerbare Energien und die Umwelt in der
+    Sulzbacher Gemeinde.
+  </h2>
+</section>
+
+<section class="mission-statement">
+  <h2>Unsere Mission</h2>
+  <p>
+    Wir setzen uns für eine nachhaltige Energiezukunft ein, indem wir
+    Informationen, Beratung und Unterstützung rund um erneuerbare Energien in
+    Sulzbach bieten. Unser Ziel ist es, die Gemeinschaft zu stärken und den
+    Übergang zu einer grüneren Zukunft zu fördern.
+  </p>
+</section>
+
+<section>
+  <h2>Wir beraten die Sulzbacher Gemeinde für PV und Balkonkraftwerke</h2>
+  <h3><a href="/bürger-solarberatung">Hier geht's zur Solarberatung</a></h3>
+</section>
+
+<UpCompingEvent eventId="infoabend_klimageräte" />
+
+<section class="termin-list">
+  <TerminList termine={termine} />
+</section>
+
+<section>
+  <h2>Kontakt</h2>
+  habt ihr Fragen oder möchtet mehr über unsere Arbeit erfahren? Kontaktiert uns gerne
+  oder kommt einfach vorbei!
+  <p>
+    E-Mail: <a href="mailto:info@aee-sulzbach.de"> info@aee-sulzbach.de </a>
+  </p>
+</section>
 
 <style>
-  h1 {
+  .hero {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: clamp(20px, 5vw, 48px);
     text-align: center;
   }
 
-  .a {
-    container-type: inline-size;
-    @container (min-width: 322px) {
-      .b {
-        background-color: aqua;
-      }
-      .c {
-        background-color: red;
-      }
-    }
+  .badge {
+    margin: 0;
+    font-weight: 700;
+    color: var(--primary-color-strong);
+  }
 
-    @container (max-width: 322px) {
-      .b {
-        background-color: red;
-      }
-      .c {
-        background-color: aqua;
-      }
+  h1 {
+    margin: 0.3rem 0 0;
+  }
+
+  h2 {
+    margin: 0.8rem auto 0;
+    max-width: 55ch;
+    font-weight: 500;
+  }
+
+  .mission-statement {
+    margin: 2rem 0;
+    padding: 1.5rem;
+
+    h2 {
+      margin-top: 0;
     }
   }
 
-  .b {
-    width: 100px;
-    height: 100px;
-  }
-
-  .c {
-    width: 100px;
-    height: 100px;
+  .termin-list {
+    margin: 3rem 0;
   }
 </style>
