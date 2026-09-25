@@ -1,7 +1,7 @@
 ---
-import { BASE_URL } from "../../config";
+import { BASE_URL } from "../../../config";
 import { Image } from "astro:assets";
-import AeeLogo from "../assets/new_logo/bild_logo.svg";
+import AeeLogo from "../../assets/new_logo/bild_logo.svg";
 ---
 
 <header class="centered">
@@ -27,9 +27,9 @@ import AeeLogo from "../assets/new_logo/bild_logo.svg";
     >
       <ul>
         <li><a href={BASE_URL}>Start</a></li>
-        <li><a href={BASE_URL + "about"}>Über uns</a></li>
-        <li><a href={BASE_URL + "fundings"}>Förderungen</a></li>
-        <li><a href={BASE_URL + "solar"}>Solarberatung</a></li>
+        <li><a href={BASE_URL + "über-uns"}>Über uns</a></li>
+        <li><a href={BASE_URL + "förderungen"}>Förderungen</a></li>
+        <li><a href={BASE_URL + "bürger-solarberatung"}>Solarberatung</a></li>
         <li><a href={BASE_URL + "termine"}>Termine</a></li>
       </ul>
     </nav>

@@ -1,10 +1,10 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import { render } from "astro:content";
-import { BASE_URL } from "../../config";
-import MapsLink from "./MapsLink.astro";
-import LinkButton from "./LinkButton.astro";
-import CalendarLink from "./CalendarLink.astro";
+import { BASE_URL } from "../../../config";
+import LinkButton from "../LinkButton.astro";
+import CalendarLink from "../utility/CalendarLink.astro";
+import MapsLink from "../utility/MapsLink.astro";
 
 interface Props {
   termin: CollectionEntry<"termine">;

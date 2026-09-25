@@ -1,10 +1,7 @@
 ---
-import { BASE_URL } from "../../config";
-import TerminList from "./TerminList.astro";
-import UpCompingEvent from "./UpCompingEvent.astro";
 import { getCollection } from "astro:content";
-import solarberatungImage1 from "../assets/Events/Solarberatung_05_05/1.jpg";
-import solarberatungImage2 from "../assets/Events/Solarberatung_05_05/2.jpg";
+import UpCompingEvent from "./UpCompingEvent.astro";
+import TerminList from "./termin/TerminList.astro";
 
 const termine = await getCollection("termine");
 ---
@@ -30,7 +27,7 @@ const termine = await getCollection("termine");
 
 <section>
   <h2>Wir beraten die Sulzbacher Gemeinde für PV und Balkonkraftwerke</h2>
-  <h3><a href="/solar">Hier geht's zur Solarberatung</a></h3>
+  <h3><a href="/bürger-solarberatung">Hier geht's zur Solarberatung</a></h3>
 </section>
 
 <UpCompingEvent eventId="infoabend_klimageräte" />

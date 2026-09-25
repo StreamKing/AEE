@@ -23,7 +23,7 @@ fi
 echo "Lade Dateien hoch nach $FTP_HOST:$FTP_REMOTE ..."
 lftp -u "$FTP_USER","$FTP_PASS" "ftp://$FTP_HOST" -e "
   set ssl:verify-certificate no
-  mirror -R --delete --verbose $DRY_RUN ./dist $FTP_REMOTE
+  mirror -R --delete --verbose --exclude-glob .cagefs $DRY_RUN ./dist $FTP_REMOTE
   quit
 "
 
