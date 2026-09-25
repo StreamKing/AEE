@@ -1,8 +1,8 @@
 ---
 import "../colors.css";
 import "../global.css";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
+import Header from "../components/structure/Header.astro";
+import Footer from "../components/structure/Footer.astro";
 import Main from "../components/Main.astro";
 
 const { centered } = Astro.props;
@@ -15,7 +15,7 @@ const layout = centered ? "centered" : "full-width";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> -->
+    <link rel="icon" type="image/svg+xml" href="/bild_logo.svg" />
     <meta name="generator" content={Astro.generator} />
 
     <title>AEE Sulzbach</title>
@@ -30,30 +30,22 @@ const layout = centered ? "centered" : "full-width";
 </html>
 
 <style>
-  .nav-container {
-    display: flex;
-    justify-content: end;
-  }
-</style>
-
-<style>
   html,
   body {
-    container-type: inline-size;
     margin: 0;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+    min-height: 100dvh;
 
     background-color: var(--background-color);
 
-    --header-grid-columns: min-content auto;
-    --header-justify-nav-container: end;
-    @container (max-width: 521px) {
-      header {
-        --header-grid-columns: auto;
-        --header-justify-nav-container: start;
-      }
+    --header-grid-columns: min-content 1fr;
+    --header-justify-nav-container: flex-end;
+  }
+
+  @media (max-width: 700px) {
+    html,
+    body {
+      --header-grid-columns: min-content 1fr;
+      --header-justify-nav-container: flex-end;
     }
   }
 </style>

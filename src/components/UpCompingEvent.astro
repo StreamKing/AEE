@@ -1,0 +1,63 @@
+---
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import Termin_card from "./termin/Termin_card.astro";
+
+interface Props {
+    eventId?: string;
+    heading?: string;
+}
+
+const { eventId, heading = "Unsere nächste Veranstaltung" } =
+    Astro.props as Props;
+
+const termine: CollectionEntry<"termine">[] = await getCollection("termine");
+const termin = eventId
+    ? termine.find((entry) => entry.id === eventId)
+    : undefined;
+---
+
+<section class="event-spotlight" aria-labelledby="event-spotlight-heading">
+    <h3 id="event-spotlight-heading">{heading}</h3>
+    {
+        termin ? (
+            <Termin_card termin={termin} spotlight={true} skipDetails={true} />
+        ) : (
+            <p class="empty-state">
+                Der ausgewählte Termin wurde nicht gefunden.
+            </p>
+        )
+    }
+</section>
+
+<style>
+    .event-spotlight {
+        margin: 2rem 0;
+        padding: 1.25rem;
+    }
+
+    .event-spotlight h3 {
+        margin: 0 0 0.5rem;
+        text-align: center;
+    }
+
+    .empty-state {
+        margin: 0;
+        text-align: center;
+    }
+
+    .event-spotlight :global(.card) {
+        align-items: center;
+        text-align: left;
+    }
+
+    .event-spotlight :global(.card > .header) {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .event-spotlight :global(.card .location) {
+        text-align: left;
+    }
+</style>

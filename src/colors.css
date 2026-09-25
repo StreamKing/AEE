@@ -1,15 +1,63 @@
+@import url("theme_1.css");
+
 :root {
-  --primary-color: #008bcc;
-  --secondary-color: #0088c7d2;
-  --border-color: #0088c7d2;
+  color-scheme: light;
 
-  --background-color: light-dark(white, rgb(28, 27, 27));
+  /* Direkte Theme-Referenzen */
+  --primary-color: var(--theme-primary);
+  --accent-color: var(--theme-accent);
+  --background-color: color-mix(in srgb, var(--theme-primary) 15%, white);
+  --primary-text-color: var(--theme-text);
+  --link-color: var(--theme-primary);
 
-  --primary-text-color: var(--secondary-color);
-  --highlight-color: var(--primary-color);
+  /* Abgeleitete Farben */
+  --primary-color-strong: color-mix(in srgb, var(--theme-primary) 75%, black);
+  --secondary-color: color-mix(in srgb, var(--theme-secondary) 35%, white);
+  --surface-color: white;
+  --surface-muted: color-mix(in srgb, var(--theme-background) 80%, var(--theme-secondary) 20%);
+  --border-color: color-mix(in srgb, var(--theme-secondary) 55%, white);
+  --header-background-color: color-mix(in srgb, var(--background-color) 92%, white 8%);
 
-  --nav-item-background-hover-color: var(--primary-text-color);
-  --nav-item-text-color-hover-color: light-dark(black, white);
+  --small-text-color: color-mix(in srgb, var(--theme-primary) 45%, var(--theme-text) 55%);
+  --muted-text-color: color-mix(in srgb, var(--theme-secondary) 50%, var(--theme-text) 50%);
+  --text-secondary: color-mix(in srgb, var(--theme-secondary) 50%, var(--theme-text) 50%);
+  --table-header-bg: var(--primary-color-strong);
+  --highlight-color: var(--primary-color-strong);
 
-  --small-text-color: light-dark(black, white);
+  --nav-item-background-hover-color: var(--secondary-color);
+  --nav-item-text-color-hover-color: var(--theme-text);
+
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --shadow-sm: 0 2px 12px color-mix(in srgb, var(--theme-primary) 10%, transparent);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    /* Im Dark-Mode wird secondary zur primären Interaktionsfarbe */
+    --primary-color: color-mix(in srgb, var(--theme-secondary) 60%, black 40%);
+    --primary-color-strong: color-mix(in srgb, var(--theme-secondary) 70%, white);
+    --secondary-color: color-mix(in srgb, var(--theme-primary) 20%, black);
+    --accent-color: color-mix(in srgb, var(--theme-accent) 55%, var(--theme-secondary) 45%);
+
+    --background-color: color-mix(in srgb, var(--theme-primary) 10%, black);
+    --surface-color: color-mix(in srgb, var(--theme-primary) 18%, black);
+    --surface-muted: color-mix(in srgb, var(--theme-primary) 24%, black);
+    --border-color: color-mix(in srgb, var(--theme-primary) 35%, black);
+    --header-background-color: color-mix(in srgb, var(--background-color) 90%, black 10%);
+
+    --primary-text-color: var(--theme-background);
+    --small-text-color: color-mix(in srgb, var(--theme-background) 85%, var(--theme-secondary) 15%);
+    --muted-text-color: color-mix(in srgb, var(--theme-background) 60%, var(--theme-secondary) 40%);
+    --link-color: var(--theme-secondary);
+    --text-secondary: color-mix(in srgb, var(--theme-background) 60%, var(--theme-secondary) 40%);
+    --table-header-bg: color-mix(in srgb, var(--theme-primary) 15%, black);
+    --highlight-color: var(--theme-secondary);
+
+    --nav-item-background-hover-color: var(--secondary-color);
+    --nav-item-text-color-hover-color: var(--theme-background);
+    --shadow-sm: 0 10px 24px color-mix(in srgb, var(--theme-text) 40%, transparent);
+  }
 }

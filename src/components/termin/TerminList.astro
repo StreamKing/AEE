@@ -1,0 +1,243 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { BASE_URL } from "../../../config";
+
+interface Props {
+    termine: CollectionEntry<"termine">[];
+}
+
+const { termine } = Astro.props;
+
+const parseDate = (str: string): Date => {
+    const [day, month, year] = str.split(".");
+    return new Date(`${year}-${month}-${day}`);
+};
+
+const sortedTermine = [...termine].sort((a, b) => {
+    if (!a.data.date) return 1;
+    if (!b.data.date) return -1;
+    return parseDate(a.data.date).getTime() - parseDate(b.data.date).getTime();
+});
+---
+
+<section class="termin-list">
+    <h2>Termine und Veranstaltungen</h2>
+    <p class="no-upcoming" data-no-upcoming hidden>
+        Keine kommenden Termine oder Veranstaltungen vorhanden.
+    </p>
+    <ul data-upcoming-list>
+        {
+            sortedTermine.map((termin) => (
+                <li data-termin-item data-date={termin.data.date ?? ""}>
+                    <a
+                        class="termin-card"
+                        href={`${BASE_URL}termine/${termin.id}`}
+                    >
+                        <div class="termin-content">
+                            <h3>{termin.data.title}</h3>
+                            <div class="termin-meta">
+                                <time class="termin-date">
+                                    {termin.data.date
+                                        ? parseDate(
+                                              termin.data.date,
+                                          ).toLocaleDateString("de-DE", {
+                                              year: "numeric",
+                                              month: "long",
+                                              day: "numeric",
+                                          })
+                                        : "Termin noch nicht festgelegt"}
+                                </time>
+                                {termin.data.time && (
+                                    <span class="termin-time">
+                                        {termin.data.time.von}–
+                                        {termin.data.time.bis} Uhr
+                                    </span>
+                                )}
+                                {termin.data.location && (
+                                    <span class="termin-location">
+                                        {termin.data.location}
+                                    </span>
+                                )}
+                            </div>
+                        </div>
+                        <span class="termin-arrow" aria-hidden="true">
+                            →
+                        </span>
+                    </a>
+                </li>
+            ))
+        }
+    </ul>
+    <div data-past-section hidden>
+        <hr />
+        <h3 class="past-heading">Vergangene Termine</h3>
+        <ul data-past-list></ul>
+    </div>
+</section>
+
+<script>
+    const parseDate = (value: string): Date | null => {
+        const [day, month, year] = value.split(".");
+        if (!day || !month || !year) return null;
+        return new Date(`${year}-${month}-${day}T00:00:00`);
+    };
+
+    const terminList = document.querySelector<HTMLElement>(".termin-list");
+    if (terminList) {
+        const upcomingList = terminList.querySelector<HTMLUListElement>(
+            "[data-upcoming-list]",
+        );
+        const pastList =
+            terminList.querySelector<HTMLUListElement>("[data-past-list]");
+        const pastSection = terminList.querySelector<HTMLElement>(
+            "[data-past-section]",
+        );
+        const noUpcomingMessage =
+            terminList.querySelector<HTMLElement>("[data-no-upcoming]");
+
+        if (upcomingList && pastList && pastSection && noUpcomingMessage) {
+            const allItems = Array.from(
+                upcomingList.querySelectorAll<HTMLLIElement>(
+                    "[data-termin-item]",
+                ),
+            );
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            const upcoming = [];
+            const past = [];
+
+            for (const item of allItems) {
+                const dateValue = item.dataset.date;
+                const parsedDate = dateValue ? parseDate(dateValue) : null;
+
+                if (parsedDate && parsedDate < today) {
+                    past.push({ item, parsedDate });
+                } else {
+                    upcoming.push({ item, parsedDate });
+                }
+            }
+
+            upcoming.sort((a, b) => {
+                if (!a.parsedDate) return 1;
+                if (!b.parsedDate) return -1;
+                return a.parsedDate.getTime() - b.parsedDate.getTime();
+            });
+
+            past.sort(
+                (a, b) => b.parsedDate.getTime() - a.parsedDate.getTime(),
+            );
+
+            upcomingList.innerHTML = "";
+            pastList.innerHTML = "";
+
+            for (const entry of upcoming) {
+                upcomingList.appendChild(entry.item);
+            }
+
+            for (const entry of past.slice(0, 3)) {
+                const link = entry.item.querySelector(".termin-card");
+                if (link) {
+                    link.classList.add("past");
+                }
+                pastList.appendChild(entry.item);
+            }
+
+            noUpcomingMessage.hidden = upcoming.length !== 0;
+            upcomingList.hidden = upcoming.length === 0;
+            pastSection.hidden = past.length === 0;
+        }
+    }
+</script>
+
+<style>
+    .termin-list {
+        margin: 2rem 0;
+    }
+
+    .termin-list h2 {
+        margin-bottom: 1.5rem;
+    }
+
+    .no-upcoming {
+        margin: 0;
+    }
+
+    .termin-list ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .termin-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1rem 1.25rem;
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-lg);
+        background-color: var(--surface-color);
+        box-shadow: var(--shadow-sm);
+        text-decoration: none;
+        color: inherit;
+        transition: border-color 0.15s;
+    }
+
+    .termin-card:hover {
+        border-color: var(--primary-color);
+    }
+
+    .termin-content h3 {
+        margin: 0 0 0.3rem 0;
+        font-size: 1.1rem;
+        text-align: start;
+    }
+
+    .termin-meta {
+        display: flex;
+        gap: 0.75rem;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .termin-date {
+        color: var(--muted-text-color);
+        font-size: 0.95rem;
+    }
+
+    .termin-time {
+        color: var(--muted-text-color);
+        font-size: 0.95rem;
+    }
+
+    .termin-location {
+        color: var(--muted-text-color);
+        font-size: 0.95rem;
+    }
+
+    .termin-arrow {
+        font-size: 1.25rem;
+        flex-shrink: 0;
+        color: var(--muted-text-color);
+        transition: transform 0.15s;
+    }
+
+    .termin-card:hover .termin-arrow {
+        transform: translateX(3px);
+        color: var(--primary-color);
+    }
+
+    .past-heading {
+        margin: 0.5rem 0 0.75rem;
+        font-size: 1rem;
+        color: var(--muted-text-color);
+    }
+
+    .termin-card.past {
+        opacity: 0.7;
+    }
+</style>
