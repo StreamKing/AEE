@@ -40,7 +40,7 @@ const spotlight = upcoming.shift();
   {past.length > 0 && (
     <h2 class="section-heading">Vergangene Termine</h2>
     <ul class="blog-post-card-container past">
-      {past.map((termin) => (
+      {past.sort((a, b) => parseDate(b.data.date ?? "") - parseDate(a.data.date ?? "")).map((termin) => (
         <li class="blog-post">
           <Termin_card termin={termin} />
         </li>

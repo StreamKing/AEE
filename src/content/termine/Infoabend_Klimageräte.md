@@ -1,6 +1,6 @@
 ---
 title: "Infoabend Klimageräte"
-date: "25.09.2026"
+date: "30.09.2026"
 time:
   von: "19:00"
   bis: "21:00"
@@ -8,6 +8,7 @@ description: "Klimageräte sind nicht nur seid diesem Sommer in aller Munde. Wir
 location: "Großer Saal  65843 Sulzbach, Platz an der Linde 3"
 mapsUrl: "https://www.google.com/maps/search/?api=1&query=Feldbergstraße,+Sulzbach+am+Taunus"
 tags: ["Veranstaltung","Sulzbach"]
+docs: ["downloads/events/klimageräte/Vortrag Klimageräte.pdf"]
 ---
 
 Ein ganze Infoabend über Klimageräte, wir zeigen euch was geht und was nicht geht. Außerdem klären wir eure Fragen. 

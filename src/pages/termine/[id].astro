@@ -31,6 +31,7 @@ const isAfterDate = (): boolean => {
         <LinkButton href="/termine/" arrow="left">zurück</LinkButton>
         <div class="header">
             <h1>{termin.data.title}</h1>
+
             <div class="header-meta">
                 <h2>
                     {
@@ -48,6 +49,26 @@ const isAfterDate = (): boolean => {
                 }
             </div>
         </div>
+        <div class="documents">
+            <p>Dokumente:</p>
+            {
+                termin.data.docs && termin.data.docs.length > 0 ? (
+                    <>
+                        <ol>
+                            {termin.data.docs.map((doc) => (
+                                <li>
+                                    <a href={`/${doc}`} download>
+                                        {doc.split("/").at(-1)}
+                                    </a>
+                                </li>
+                            ))}
+                        </ol>
+                    </>
+                ) : (
+                    <p>Keine Dokumente verfügbar.</p>
+                )
+            }
+        </div>
         {
             termin.data.location && (
                 <p class="location">
@@ -63,25 +84,22 @@ const isAfterDate = (): boolean => {
         <div>
             <Content />
         </div>
-        {isAfterDate() && <hr />}
-        {
-            isAfterDate() && (
-                <details style="cursor:pointer">
-                    <summary style="cursor:pointer">
-                        Vergangene Nachrichten
-                    </summary>
-                    <h4>{termin.data.description}</h4>
-                </details>
-            )
-        }
     </div>
 </Layout>
 
 <style>
     .header {
         display: flex;
+        flex-wrap: wrap;
+
         justify-content: space-between;
         align-items: baseline;
+    }
+
+    .documents {
+        > ol {
+            padding-left: 1rem;
+        }
     }
 
     .centered {
