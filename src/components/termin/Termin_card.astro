@@ -74,7 +74,9 @@ const calendarUrl = termin.data.date
       spotlight && termin.data.location && (
         <p class="location">
           <strong>Wo:</strong> {termin.data.location}
-          {termin.data.address_for_maps && <MapsLink address={termin.data.address_for_maps} />}
+          {termin.data.address_for_maps && (
+            <MapsLink address={termin.data.address_for_maps} />
+          )}
         </p>
       )
     }
