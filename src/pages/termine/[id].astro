@@ -73,8 +73,8 @@ const isAfterDate = (): boolean => {
             termin.data.location && (
                 <p class="location">
                     {termin.data.location}
-                    {termin.data.mapsUrl && (
-                        <MapsLink url={termin.data.mapsUrl} size={20} />
+                    {termin.data.address_for_maps && (
+                        <MapsLink address={termin.data.address_for_maps} size={20} />
                     )}
                 </p>
             )

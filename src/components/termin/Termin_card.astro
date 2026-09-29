@@ -74,7 +74,7 @@ const calendarUrl = termin.data.date
       spotlight && termin.data.location && (
         <p class="location">
           <strong>Wo:</strong> {termin.data.location}
-          {termin.data.mapsUrl && <MapsLink url={termin.data.mapsUrl!} />}
+          {termin.data.address_for_maps && <MapsLink address={termin.data.address_for_maps} />}
         </p>
       )
     }
@@ -91,6 +91,22 @@ const calendarUrl = termin.data.date
           <strong>Uhrzeit:</strong> {termin.data.time.von} -{" "}
           {termin.data.time.bis}
         </p>
+      )
+    }
+    {
+      spotlight && termin.data.docs && termin.data.docs.length > 0 && (
+        <div class="documents">
+          <h3>Dokumente</h3>
+          <ul>
+            {termin.data.docs.map((doc) => (
+              <li>
+                <a href={`/${doc}`} download>
+                  {doc.split("/").at(-1)}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       )
     }
     {spotlight && <Content />}
@@ -152,6 +168,19 @@ const calendarUrl = termin.data.date
 
       .location {
         margin: 0 0 0.4rem;
+      }
+
+      .documents {
+        margin-top: 1rem;
+
+        h3 {
+          margin: 0;
+        }
+
+        ul {
+          margin: 0.4rem 0 0;
+          padding-left: 1.25rem;
+        }
       }
     }
     img {

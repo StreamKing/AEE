@@ -6,7 +6,7 @@ time:
   bis: "21:00"
 description: "Klimageräte sind nicht nur seid diesem Sommer in aller Munde. Wir klären auf und beantworten Fragen"
 location: "Großer Saal  65843 Sulzbach, Platz an der Linde 3"
-mapsUrl: "https://www.google.com/maps/search/?api=1&query=Feldbergstraße,+Sulzbach+am+Taunus"
+address_for_maps: "Platz an der Linde 3, 65843 Sulzbach am Taunus"
 tags: ["Veranstaltung","Sulzbach"]
 docs: ["downloads/events/klimageräte/Vortrag Klimageräte.pdf"]
 ---

@@ -8,7 +8,7 @@ interface Props {
     heading?: string;
 }
 
-const { eventId, heading = "Unsere nächste Veranstaltung" } =
+const { eventId, heading = "Unsere aktuelle Veranstaltung" } =
     Astro.props as Props;
 
 const termine: CollectionEntry<"termine">[] = await getCollection("termine");

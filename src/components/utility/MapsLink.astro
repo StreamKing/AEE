@@ -1,10 +1,11 @@
 ---
 interface Props {
-    url: string;
+    address: string;
     size?: number;
 }
 
-const { url, size = 18 } = Astro.props;
+const { address, size = 18 } = Astro.props;
+const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
 ---
 
 <a

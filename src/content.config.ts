@@ -14,7 +14,7 @@ const termine = defineCollection({
             .optional(),
         description: z.string().optional(),
         location: z.string().optional(),
-        mapsUrl: z.string().url().optional(),
+        address_for_maps: z.string().optional(),
         tags: z.array(z.string()).optional(),
         docs: z.array(z.string()).optional(),
     }),
