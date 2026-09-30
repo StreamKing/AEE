@@ -1,6 +1,6 @@
 ---
 title: "Infoabend Klimageräte"
-date: "30.09.2026"
+date: "25.09.2026"
 time:
   von: "19:00"
   bis: "21:00"
